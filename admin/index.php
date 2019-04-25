@@ -1,7 +1,3 @@
-﻿<?php
-require('common.php');
-?>
-
 <!doctype html>
 <html>
 <head>
