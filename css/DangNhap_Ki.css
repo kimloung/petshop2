@@ -1,0 +1,203 @@
+@charset "utf-8";
+/* CSS Document */
+.Top_dau {
+	padding: 5px 10px;
+	text-align:right;
+	background-color:#f5f5f5;
+    width: 100%;
+}
+
+.Top_dau .container{
+    padding-right: 50px;
+    padding-left: 50px;
+    margin: auto;
+}
+
+.Top_dau button {
+    background:none;
+    border:0;
+	color:red;
+	text-align:center;
+	padding:5px 10px;
+	text-decoration:none;
+	font-size:15px;
+	line-height:22px;
+	font-weight:bold;
+    outline: none;
+}
+
+.Top_dau button:hover {
+	background-color:#ff8080;
+	color:white;
+	border-radius:10px;
+	padding:5px 10px;
+    cursor: pointer;
+}
+
+.Khung_dang_nhap {
+	display:none;
+	position:fixed;
+	z-index:100;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.6);
+	padding-top:50px;
+}
+
+.Khung_thong_tin {
+	display:none;
+	position:fixed;
+	z-index:100;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.6);
+	padding-top:50px;
+}
+
+.Noi_dung_khung {
+	position:absolute;
+	top: 30%;
+    left: 5%;
+    right: 5%;
+	background:#fefefe;
+	text-align:center;
+	margin:-1.2% auto;
+	border:1px solid pink;
+	width:500px;
+	border-radius:20px;
+}
+
+.Bang_thong_tin {
+	text-align: left;
+	margin: auto;
+	width: 90%;
+	font-family: Consolas, "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", Monaco, "Courier New", "monospace";
+	padding-bottom: 20px;
+	font-size: 25px;
+}
+
+.Hoat_canh {
+	-webkit-animation: animatezoom 0.6s;
+	animation:animatezoom 0.6s;	
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+.Cach_khung {
+	padding:30px;	
+}
+
+.close{
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    right: 10px;
+    top: 10px;
+    color: white;
+    font-size: 135%;
+    font-weight: bold;
+    padding-top: 0;
+    border-radius: 30%;
+    background-color: grey;
+    opacity: 1;
+}
+
+.close:hover, .close:focus{
+    color: white;
+    cursor: pointer;
+    background-color: red;
+}
+
+.Quen_mat_khau {
+	float:right;
+	padding:10px;
+}
+
+.Cach_khung input[type=text], input[type=password] {
+	width:100%;
+	font-size:16px;
+	padding:10px 20px;
+	box-sizing:border-box;
+    border-radius: 5px;
+    margin-bottom: 5px;
+	outline:none;
+}
+
+.Khung_dang_nhap .Cach_khung button {
+	background-color:lightpink;
+	font-size:20px;
+	color: black;
+	padding:20px;
+	border:none;
+    border-radius: 5px;
+	cursor:pointer;
+	margin:auto;
+	width:100%;
+}
+
+.Khung_dang_nhap .Cach_khung button:hover {
+	border-radius:0px;
+	opacity:0.8;
+}
+
+.form-separator{
+    margin: 15px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.form-separator::before{
+    display: block;
+    content: "";
+    border-top: 1px solid darkgray;
+    width: calc(50% - 25px);
+    box-sizing: border-box;
+}
+
+.form-separator span{
+    width: 30px;
+    text-align: center;
+    color: darkgray;
+}
+
+.form-separator::after{
+    display: block;
+    content: "";
+    border-top: 1px solid darkgray;
+    width: calc(50% - 25px);
+    box-sizing: border-box;
+}
+
+.gotodangky a{
+    color: black;
+}
+
+/*For small screen*/
+@media only screen and (max-width: 600px) {
+    .Noi_dung_khung{
+        left: 1%;
+    }
+    
+    .Top_dau .container{
+        text-align: center;
+    }
+}

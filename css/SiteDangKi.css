@@ -1,0 +1,40 @@
+.test {
+    height: 40px;
+    width: 500px;
+    font-size: 16px;
+    padding: 10px 20px;
+    outline: none;
+    border-radius: 5px;
+}
+
+.Nut_Submit_Delete {
+    text-align: center;
+    padding: 15px;
+}
+
+.Nut_Submit_Delete input {
+    padding: 10px 40px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.font-dk {
+    font-size: 15px;
+    color: rgb(94, 94, 94);
+}
+
+.input-ns {
+    height: 32px;
+    border: 1px solid rgb(193, 193, 193);
+    border-radius: 5px;
+}
+
+.item-ns {
+    padding: 0 10px 0 0;
+}
+
+@media only screen and (max-width: 900px) {
+    .Middle img {
+        width: 100%;
+    }
+}
