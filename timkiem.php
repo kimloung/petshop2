@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     require 'DataProvider.php';
     require 'ProductsPerPage.inc';
     $key = $_REQUEST["key"];
@@ -8,7 +8,7 @@
     <h1 class="title-background">
         <span class="title">
             <?php
-                $title = "Kết quả tìm kiếm: $key";
+                $title = "Kết quả tìm kiếm cho '$key'";
                 echo $title;
             ?>
         </span>
