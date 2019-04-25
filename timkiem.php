@@ -8,15 +8,29 @@
     <h1 class="title-background">
         <span class="title">
             <?php
-                $title = "Kết quả tìm kiếm";
+                $title = "Kết quả tìm kiếm: $key";
                 echo $title;
+            ?>
+        </span>
+        <span class="xemtatca" style="cursor: inherit">
+            <?php
+                if(isset($_GET['key']))
+                {
+                    $key = $_GET['key'];
+                    $sql = "SELECT COUNT(*) AS numproducts FROM (SELECT sp.*, sdt.madv, sdt.matl, km.giakhuyenmai, GROUP_CONCAT(sdt.madv), COUNT(*) as numproducts FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE BINARY sp.masp LIKE '%".$key."%' OR BINARY sp.tensp LIKE '%".$key."%' OR BINARY sp.mota LIKE '%".$key."%' GROUP BY sp.masp) AS c";
+                }
+                $result = DataProvider::executeQuery($sql);
+                $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $numproducts = $product['numproducts'];
+                $kq = "$numproducts sản phẩm";
+                echo $kq;
             ?>
         </span>
     </h1>
      <div class="container">
          <div id="sp">
              <?php
-                $sql = "SELECT sp.*, sdt.madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE sp.masp LIKE '%".$key."%' OR sp.tensp LIKE '%".$key."%' OR sp.mota LIKE '%".$key."%'";
+                $sql = "SELECT sp.*, sdt.madv, sdt.matl, km.giakhuyenmai, GROUP_CONCAT(sdt.madv) FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE BINARY sp.masp LIKE '%".$key."%' OR BINARY sp.tensp LIKE '%".$key."%' OR BINARY sp.mota LIKE '%".$key."%' GROUP BY sp.masp";
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
                 while ($row = mysqli_fetch_array($result))
