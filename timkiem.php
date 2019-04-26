@@ -30,6 +30,18 @@
      <div class="container">
          <div id="sp">
              <?php
+                if($numproducts == 0){
+                    echo "<center>";
+                    echo "     <img src='images/background/nofound.png'>";
+                    echo "     <span>";
+                    echo "         <br><strong>Ôi không!</strong><br>";
+                    echo "         Có vẻ như chú chó này đã lấy mất tất cả sản phẩm bạn mà tìm kiếm.<br>";
+                    echo "         Trừ khi bạn đang tìm kiếm chú chó đáng yêu này. Chúc mừng! Bạn đã tìm thấy nó.<br>";
+                    echo "     </span>";
+                    echo "</center>";
+                }
+             ?>
+             <?php
                 $sql = "SELECT sp.*, sdt.madv, sdt.matl, km.giakhuyenmai, GROUP_CONCAT(sdt.madv) FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE BINARY sp.masp LIKE '%".$key."%' OR BINARY sp.tensp LIKE '%".$key."%' OR BINARY sp.mota LIKE '%".$key."%' GROUP BY sp.masp";
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
