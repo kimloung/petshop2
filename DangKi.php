@@ -1,44 +1,34 @@
-﻿<style>
-body {
-    background-image: url(images/dangky/8cc6d2466228e4f2a9fad8cb7ab7d51d.jpg);
-}
-</style>
-
-<div class="Middle">
+﻿<div class="Middle">
 	
-    <form method="post" onsubmit="return kiemtra()" action="index.php" >
+    <form method="post" onsubmit="return kiemtra()" action="index.php" class="DangKi">
        		 
-        <div style="text-align:center;margin:auto;">
-            <a><img src="images/dangky/a15ec2a159ad63ec717d1523f3b1db4d.jpg" height="300" width="900"></a>
-            <h1 style="color:orangered">ĐĂNG KÝ NGƯỜI DÙNG</h1>
+        <div class="dangkynguoidung">
+            <a><img src="images/dangky/a15ec2a159ad63ec717d1523f3b1db4d.jpg"></a>
+            <h1>ĐĂNG KÝ NGƯỜI DÙNG</h1>
         </div>
 
-
-        <div style="text-align:center;color:darkorchid">
-            <div style="padding-top:10px">
-                <h3>Tên đăng nhập</h3>
+        <div class="thongtincanhan">
+            <div class="thongtin">
+                <h3>Tên đăng nhập*</h3>
                 <div><input class="test" type="text" name="" id="UserName" size="70" placeholder="Tên đăng nhập không được có dấu và khoảng cách!!!!"></div>
             </div>
-            <div style="padding-top:10px">
-                 <h3>Mật khẩu</h3>
+            <div class="thongtin">
+                 <h3>Mật khẩu*</h3>
                  <div style="width:500px;margin:auto"><input type="password" name="" id="MatKhau" placeholder="Tối thiểu 5 kí tự" ></div>
             </div>
-            <div style="padding-top:10px">
-                 <h3>Nhập lại mật khẩu</h3>
+            <div class="thongtin">
+                 <h3>Nhập lại mật khẩu*</h3>
                  <div style="width:500px;margin:auto"><input type="password" name="Name" id="Re-MatKhau" placeholder="**************" ></div>		
             </div>
-        </div>
-
-        <div style="text-align:center;color:darkorchid">
-            <div>
+            <div class="thongtin">
             	<h3>Email</h3>
                 <input type="email" name="email" id="email" class="test" />
             </div>
-            <div style="padding-top:10px">
-                <h3>Họ và tên</h3>
+            <div class="thongtin">
+                <h3>Họ và tên*</h3>
                 <input type="text" name="Name" id="Name" class="test" placeholder=""/>
             </div>
-            <div style="padding-top:10px">
+            <div class="thongtin">
                 <h3>Ngày tháng năm sinh</h3>
                 <div class="item-dk" style="padding-top:16px;">
                     <!--ngay sinh-->
@@ -46,31 +36,29 @@ body {
                         <input type="date" />
                     </div>
                 </div>
-                <div style="padding-top:10px">
-                    <h3>Số điện thoại</h3>
-                    <input type="text" name="phone" id="phone" class="test" placeholder=" ">*
-                </div>
-                <div style="padding-top:10px">
-                    <h3 style="margin-bottom:8px">Giới tính</h3>
-                    <div style="font-size:18px">
-                        <span style="padding-right:35px"><label><input name="sex" id="malesex" type="radio" value="Nam"/>Nam</label></span>
-                        <span><label><input name="sex" id="femalesex" type="radio" value="Nu"/>Nữ</label></span>
-                    </div>
+            </div>
+            <div class="thongtin">
+                <h3>Số điện thoại*</h3>
+                <input type="text" name="phone" id="phone" class="test" placeholder=" ">
+            </div>
+            <div class="thongtin">
+                <h3 style="margin-bottom:8px">Giới tính</h3>
+                <div style="font-size:18px">
+                    <span style="padding-right:35px"><label><input name="sex" id="malesex" type="radio" value="Nam"/>Nam</label></span>
+                    <span><label><input name="sex" id="femalesex" type="radio" value="Nu"/>Nữ</label></span>
                 </div>
             </div>
             
-            <div style="margin-top: 15px"><label>
+            <div class="thongtin"><label>
                 <input type="checkbox" name="agree" id="agree">
-                <span>Tôi đã đọc và đồng ý với <a href="index.php?site=dieukhoansudung" style="text-decoration: none; font-weight: bold; color: unset">Điều khoản sử dụng</a> của PetShop</span>
+                <span>Tôi đã đọc và đồng ý với <a href="index.php?site=dieukhoansudung" class="dongy">Điều khoản sử dụng</a> của PetShop*</span>
             </label></div>
-
             <div class="Nut_Submit_Delete">
-                <span style="padding-right:35px"><input type="submit" value="Đăng ký" style="cursor:pointer" /></span>
-                <span><input type="reset" style="cursor:pointer" value="Nhập lại" onclick="document.getElementById('UserName').focus();"/></span>
+                <span style="padding-right:35px"><input type="submit" value="Đăng ký"/></span>
+                <span><input type="reset" value="Nhập lại" onclick="document.getElementById('UserName').focus();"/></span>
             </div>
-
-            <div class="clear"></div>
         </div>
+        <div class="clear"></div>
     </form>
 </div>
 
@@ -121,7 +109,7 @@ body {
 		}
 		if(password.value.length<5)
 		{
-			window.alert("Mật khẩu chưa đủ 5 kí tự,hãy nhập lại");
+			window.alert("Mật khẩu chưa đủ 5 kí tự,vui lòng nhập lại");
 			password.focus();
 			return false;
 		}
@@ -133,7 +121,7 @@ body {
 		}
 		if(password.value!=re_password.value)
 		{
-			window.alert("Mật khẩu bạn nhập lại đã sai,xin hãy nhập lại");
+			window.alert("Mật khẩu bạn nhập lại đã sai,vui lòng nhập lại");
 			re_password.focus();
 			return false;
 		}
@@ -159,12 +147,6 @@ body {
 		{
 			window.alert("Số điện thoại không hợp lệ, vui lòng nhâọ lại");
 			phone.focus();
-			return false;
-		}
-		if(email.value =="")
-		{
-			window.alert("Email bạn đang để trống");
-			email.focus();
 			return false;
 		}
 		if(flag5 == false)

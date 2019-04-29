@@ -26,7 +26,35 @@
     <script src="js/User.js"></script>
     <script src="js/SP.js"></script>
 
-    <title>Pet Shop - Nơi mua sắm tuyệt vời cho thú cưng của bạn</title>
+    <title>
+        <?php
+            $titletab = "Pet Shop - Nơi mua sắm tuyệt vời cho thú cưng của bạn"; 
+            if(isset($_GET['site']))
+            {
+                if($_GET['site'] == "DangKi")
+                    $titletab = "Đăng ký tài khoản";
+                else if($_GET['site'] == "GioHang")
+                    $titletab = "Giỏ hàng";
+                else if($_GET['site'] == "gioithieu")
+                    $titletab = "Giới thiệu";
+                else if($_GET['site'] == "sitemap")
+                    $titletab = "Sitemap";
+                else if($_GET['site'] == "chinhsachbaohanh")
+                    $titletab = "Chính sách bảo hành";
+                else if($_GET['site'] == "chinhsachdoitra")
+                    $titletab = "Chính sách đổi trả";
+                else if($_GET['site'] == "chinhsachgiaohang")
+                    $titletab = "Chính sách giao hàng";
+                else if($_GET['site'] == "dieukhoansudung")
+                    $titletab = "Điều khoản sử dụng";
+                else if($_GET['site'] == "phuongthucthanhtoan")
+                    $titletab = "Phương thức thanh toán";
+                else if($_GET['site'] == "tuyendung")
+                    $titletab = "Tuyển dụng nhân viên";
+            }
+            echo $titletab;
+        ?>
+    </title>
 <style>
 * {
 	box-sizing:border-box;
