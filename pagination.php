@@ -58,6 +58,8 @@
     $numproducts = $product['numproducts'];
     $maxPage = ceil($numproducts/$productsPerPage);
     $link=$_SERVER['REQUEST_URI'];
+    if(isset($_GET['page']))
+        $link = explode("&page=", $link)[0];
     $nav  = '';
     $LessPages = 0;
     $MorePages = 0;
