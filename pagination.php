@@ -25,20 +25,39 @@
         if($_GET['menu'] == 3)
             $sql = $sql . " AND matl='bed'";
     }
-    if(isset($_GET['key']))
+    if(isset($_GET['key'])) //Phần tìm kiếm
     {
         $key = $_GET['key'];
-        $sql = "SELECT COUNT(*) AS numproducts FROM (SELECT sp.*, sdt.madv, sdt.matl, km.giakhuyenmai, GROUP_CONCAT(sdt.madv), COUNT(*) as numproducts FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE BINARY UPPER(sp.masp) LIKE UPPER('%".$key."%') OR BINARY UPPER(sp.tensp) LIKE UPPER('%".$key."%') OR BINARY UPPER(sp.mota) LIKE UPPER('%".$key."%') GROUP BY sp.masp) AS c";
+        $sql = "SELECT COUNT(*) AS numproducts FROM (SELECT sp.*, GROUP_CONCAT(sdt.madv) AS madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE BINARY UPPER(sp.masp) LIKE UPPER('%".$key."%') OR BINARY UPPER(sp.tensp) LIKE UPPER('%".$key."%') OR BINARY UPPER(sp.mota) LIKE UPPER('%".$key."%') GROUP BY sp.masp) AS c";
+        if(isset($_GET['thucung']) || isset($_GET['theloai']) || isset($_GET['giatu']) || isset($_GET['giaden'])){
+            $where = " WHERE ";
+            $testwhere=1;
+            if($_GET['thucung'] != "all"){
+                $where = $where."madv LIKE '%".$_GET['thucung']."%'";
+                $testwhere=0;
+            }
+            if($_GET['theloai'] != "all" && $testwhere == 1){
+                $where = $where."matl LIKE '%".$_GET['theloai']."%'";
+                $testwhere=0;
+            }
+            else if($_GET['theloai'] != "all" && $testwhere == 0){
+                $where = $where." AND matl LIKE '%".$_GET['theloai']."%'";
+            }
+            if($testwhere == 1){
+                $where = $where."giatien BETWEEN ".$_GET['giatu']." AND ".$_GET['giaden'];
+                $testwhere=0;
+            }
+            else if($testwhere == 0){
+                $where = $where."AND giatien BETWEEN ".$_GET['giatu']." AND ".$_GET['giaden'];
+            }
+            $sql = $sql.$where;
+        }
     }
     $result = DataProvider::executeQuery($sql);
     $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
     $numproducts = $product['numproducts'];
     $maxPage = ceil($numproducts/$productsPerPage);
-    $self = "index.php?site=".$site."";
-    if (isset($_GET['menu']))
-    {
-        $self = $self . "&menu=".$_GET['menu'];
-    }
+    $link=$_SERVER['REQUEST_URI'];
     $nav  = '';
     $LessPages = 0;
     $MorePages = 0;
@@ -69,31 +88,16 @@
        }
        else if ((($page < $pageNum) && ($pageNum-$page < $showpages)) || (($page > $pageNum) && ($page-$pageNum < $showpages)))
        {
-            if (isset($_GET['menu']))
-            {
-                $nav .= "<a href='index.php?site=".$site."&menu=".$_GET['menu']."&page=".$page."'><div class='so'>".$page."</div></a>";
-            }
-            else if (isset($_GET['key']))
-            {
-                $nav .= "<a href='index.php?site=".$site."&key=".$_GET['key']."&page=".$page."'><div class='so'>".$page."</div></a>";
-            }
+                $nav .= "<a href='".$link."&page=".$page."'><div class='so'>".$page."</div></a>";
        }
     }
 
     // tao lien ket den trang truoc & trang sau, trang dau, trang cuoi
     if ($pageNum > 1)
     {
-       $page  = $pageNum - 1;
-        if (isset($_GET['menu']))
-        {
-            $prev  = "<a title='Trang trước' href='index.php?site=".$site."&menu=".$_GET['menu']."&page=".$page."'><div class='so'>&lsaquo;</div></a>";
-            $first = "<a title='Trang đầu' href='index.php?site=".$site."&menu=".$_GET['menu']."&page=1'><div class='so'>&laquo;</div></a>";
-        }
-        else if (isset($_GET['key']))
-        {
-            $prev  = "<a title='Trang trước' href='index.php?site=".$site."&key=".$_GET['key']."&page=".$page."'><div class='so'>&lsaquo;</div></a>";
-            $first = "<a title='Trang đầu' href='index.php?site=".$site."&key=".$_GET['key']."&page=1'><div class='so'>&laquo;</div></a>";
-        }
+        $page  = $pageNum - 1;
+        $prev  = "<a title='Trang trước' href='".$link."&page=".$page."'><div class='so'>&lsaquo;</div></a>";
+        $first = "<a title='Trang đầu' href='".$link."&page=1'><div class='so'>&laquo;</div></a>";
     }
     else
     {
@@ -103,17 +107,9 @@
 
     if ($pageNum < $maxPage)
     {
-       $page = $pageNum + 1;
-        if (isset($_GET['menu']))
-        {
-            $next  = "<a title='Trang kế' href='index.php?site=".$site."&menu=".$_GET['menu']."&page=".$page."'><div class='so'>&rsaquo;</div></a>";
-            $last = "<a title='Trang cuối' href='index.php?site=".$site."&menu=".$_GET['menu']."&page=".$maxPage."'><div class='so'>&raquo;</div></a>";
-        }
-        else if (isset($_GET['key']))
-        {
-            $next  = "<a title='Trang kế' href='index.php?site=".$site."&key=".$_GET['key']."&page=".$page."'><div class='so'>&rsaquo;</div></a>";
-            $last = "<a title='Trang cuối' href='index.php?site=".$site."&key=".$_GET['key']."&page=".$maxPage."'><div class='so'>&raquo;</div></a>";
-        }
+        $page = $pageNum + 1;
+        $next  = "<a title='Trang kế' href='".$link."&page=".$page."'><div class='so'>&rsaquo;</div></a>";
+        $last = "<a title='Trang cuối' href='".$link."&page=".$maxPage."'><div class='so'>&raquo;</div></a>";
     }
     else
     {

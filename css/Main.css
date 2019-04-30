@@ -32,6 +32,40 @@
     padding: 15px 15px 20px 20px;
 }
 
+.Main .xemtatca{
+    float:right;
+    font-size: 20px;
+    padding-top: 10px;
+    cursor: pointer;
+    text-decoration: none;
+	color: dodgerblue;
+    margin-top: 10px;
+    margin-right: -15px;
+}
+
+.timkiemnangcao{
+    margin-bottom: 25px;
+}
+
+.timkiemnangcao .luachon{
+    float: left;
+    margin-right: 20px;
+    color: darkblue;
+}
+
+.luachon input[type=submit]{
+    border: none;
+    color: white;
+    background-color: #FF006E;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.timkiemnangcao .selectprice{
+    width: 100px;
+    height: 25px;
+}
+
 .Main .sanpham{
     width: 23%;
     text-align: center;
@@ -123,17 +157,6 @@
     opacity: 1;
 }
 
-.Main .xemtatca{
-    float:right;
-    font-size: 20px;
-    padding-top: 10px;
-    cursor: pointer;
-    text-decoration: none;
-	color: dodgerblue;
-    margin-top: 10px;
-    margin-right: -15px;
-}
-
 .Main .sotrang{
     width: 100%;
     text-align: center;
@@ -169,6 +192,22 @@
 }
 
 /*For small screen*/
+@media only screen and (max-width: 1200px){
+    .Main .sanpham button{
+        padding: 10px;
+        font-size: 12px;
+    }
+}
+@media only screen and (max-width: 1000px){
+    .Main .title{
+        font-size: 70%;
+    }
+    
+    .Main .xemtatca{
+        font-size: 40%;
+    }
+}
+
 @media only screen and (max-width: 770px){
     .Main .container{
         margin-left: 2%;
