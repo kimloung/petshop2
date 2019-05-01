@@ -1,4 +1,4 @@
-﻿<?php
+<?php
     require 'DataProvider.php';
     require 'ProductsPerPage.inc';
 ?>
@@ -7,15 +7,15 @@
     <h1 class="title-background">
         <span class="title">
             <?php
-            $title = "Sản phẩm cho mèo";
+            $title = "Sản phẩm cho thú cưng";
             if(isset($_GET['menu']))
             {
                 if($_GET['menu'] == 1)
-                    $title = "Thức ăn cho mèo";
+                    $title = "Thức ăn cho thú cưng";
                 if($_GET['menu'] == 2)
-                    $title = "Vật dụng cho mèo";
+                    $title = "Vật dụng cho thú cưng";
                 if($_GET['menu'] == 3)
-                    $title = "Chuồng, giường cho mèo";
+                    $title = "Chuồng, giường cho thú cưng";
             }
             echo $title;
             ?>
@@ -37,39 +37,43 @@
                     $titleprice = " | Giá đến " . $format_giaden . " đ";
                 }
                 if ($giatu != "" && $giaden != "") {
-                    $titleprice = " | Giá từ " . $format_giatu . 'đ &rarr; ' . $format_giaden . "đ";
+                    $titleprice = " | Giá từ " . $format_giatu . 'đ <i class="fas fa-arrow-right"></i> ' . $format_giaden . "đ";
                 }
                 echo $titleprice . "</span>";
             }
         ?>
     </h1>
-     <div class="container">
-         <div id="sp">
-             <?php
-                $sql = "SELECT sp.*, sdt.madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE madv='cat'";
+    <div class="container">
+        <div id="sp">
+            <?php
+                $sql = "SELECT sp.*, GROUP_CONCAT(sdt.madv) AS madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp";
                 if (isset($_GET['menu']))
                 {
-                    if($_GET['menu'] == 0)
-                        $sql = $sql;
                     if($_GET['menu'] == 1)
-                        $sql = $sql . " AND matl='food'";
+                        $sql = $sql . " WHERE sdt.matl='food'";
                     if($_GET['menu'] == 2)
-                        $sql = $sql . " AND matl='stuff'";
+                        $sql = $sql . " WHERE sdt.matl='stuff'";
                     if($_GET['menu'] == 3)
-                        $sql = $sql . " AND matl='bed'";
+                        $sql = $sql . " WHERE sdt.matl='bed'";
                 }
 
                 if (isset($_GET['pricefrom']) && isset($_GET['priceto'])) {
                     $giatu = $_GET['pricefrom'];
                     $giaden = $_GET['priceto'];
-                    if ($giatu != "" && $giaden == "")
-                        $sql = $sql . " AND sp.giatien >= " . $giatu;
-                    if ($giaden != "" && $giatu == "")
-                        $sql = $sql . " AND sp.giatien <= " . $giaden;
-                    if ($giatu != "" && $giaden != "")
-                        $sql = $sql . " AND (sp.giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
+                    if($giatu != "" || $giaden != ""){
+                        if (strpos($sql,"WHERE") === false)
+                            $sql = $sql . " WHERE";
+                        else
+                            $sql = $sql . " AND";
+                        if ($giatu != "" && $giaden == "")
+                            $sql = $sql . " sp.giatien >= " . $giatu;
+                        if ($giaden != "" && $giatu == "")
+                            $sql = $sql . " sp.giatien <= " . $giaden;
+                        if ($giatu != "" && $giaden != "")
+                            $sql = $sql . " (sp.giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
+                    }
                 }
-
+                $sql = $sql . " GROUP BY sp.masp";
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
                 while ($row = mysqli_fetch_array($result))
@@ -96,14 +100,14 @@
                     echo "</div>";
                 }
             ?>
-         </div>
-         <div class="clear"></div>
-         
-         <?php
+        </div>
+        <div class="clear"></div>
+        
+        <?php
             include('pagination.php');
-         ?>
-         
-         <div class="clear"></div>
-     </div>
+        ?>
+        
+        <div class="clear"></div>
+    </div>
 </div>
 <div class="clear"></div>

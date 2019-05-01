@@ -20,6 +20,28 @@
             echo $title;
             ?>
         </span>
+        <?php
+            if (isset($_GET['pricefrom']) && isset($_GET['priceto'])) {
+                echo '<span class="title-price">';
+                $titleprice = "";
+                $giatu = $_GET['pricefrom'];
+                $giaden = $_GET['priceto'];
+
+                $format_giatu = number_format(floatval($giatu), 0, ',', '.');
+                $format_giaden = number_format(floatval($giaden), 0, ',', '.');
+
+                if ($giatu != "" && $giaden == "") {
+                    $titleprice = " | Giá từ " . $format_giatu . " đ";
+                }
+                if ($giaden != "" && $giatu == "") {
+                    $titleprice = " | Giá đến " . $format_giaden . " đ";
+                }
+                if ($giatu != "" && $giaden != "") {
+                    $titleprice = " | Giá từ " . $format_giatu . 'đ &rarr; ' . $format_giaden . "đ";
+                }
+                echo $titleprice . "</span>";
+            }
+        ?>
     </h1>
      <div class="container">
          <div id="sp">
@@ -36,6 +58,17 @@
                     if($_GET['menu'] == 3)
                         $sql = $sql . " AND matl='bed'";
                 }
+                if (isset($_GET['pricefrom']) && isset($_GET['priceto'])) {
+                    $giatu = $_GET['pricefrom'];
+                    $giaden = $_GET['priceto'];
+                    if ($giatu != "" && $giaden == "")
+                        $sql = $sql . " AND sp.giatien >= " . $giatu;
+                    if ($giaden != "" && $giatu == "")
+                        $sql = $sql . " AND sp.giatien <= " . $giaden;
+                    if ($giatu != "" && $giaden != "")
+                        $sql = $sql . " AND (sp.giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
+                }
+
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
                 while ($row = mysqli_fetch_array($result))

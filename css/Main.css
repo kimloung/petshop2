@@ -1,30 +1,38 @@
 @charset "utf-8";
+
 /* CSS Document */
 
 .Main {
-	max-width: 1200px;
+    max-width: 1200px;
     padding-right: 10px;
     padding-left: 10px;
     margin: auto;
 }
 
-.Main hr{
+.Main hr {
     margin-top: 0px;
 }
 
-.Main .title-background{
+.Main .title-background {
     padding: 30px 50px 0 30px;
     margin-bottom: -8px;
 }
 
-.Main .title{
+.Main .title {
     color: red;
     text-shadow: 5px 0 5px #B8B8B8;
-	padding:5px;
+    padding: 5px;
     text-transform: uppercase;
 }
 
-.Main .container{
+.Main .title-price {
+    text-transform: none;
+    color: red;
+    font-size: 0.6em;
+    font-weight: 400;
+}
+
+.Main .container {
     margin: 0 40px 20px 20px;
     background-color: #FFEBF5;
     box-shadow: 0 1px 10px #D3D3D3;
@@ -32,41 +40,7 @@
     padding: 15px 15px 20px 20px;
 }
 
-.Main .xemtatca{
-    float:right;
-    font-size: 20px;
-    padding-top: 10px;
-    cursor: pointer;
-    text-decoration: none;
-	color: dodgerblue;
-    margin-top: 10px;
-    margin-right: -15px;
-}
-
-.timkiemnangcao{
-    margin-bottom: 25px;
-}
-
-.timkiemnangcao .luachon{
-    float: left;
-    margin-right: 20px;
-    color: darkblue;
-}
-
-.luachon input[type=submit]{
-    border: none;
-    color: white;
-    background-color: #FF006E;
-    height: 25px;
-    border-radius: 5px;
-}
-
-.timkiemnangcao .selectprice{
-    width: 100px;
-    height: 25px;
-}
-
-.Main .sanpham{
+.Main .sanpham {
     width: 23%;
     text-align: center;
     margin: 15px 10px;
@@ -75,19 +49,19 @@
     background-color: white;
 }
 
-.Main .sanpham:hover{
+.Main .sanpham:hover {
     box-shadow: 0 1px 10px #FF5EE0;
 }
 
-.sanpham a{
+.sanpham a {
     color: black;
 }
 
-.sanpham a:visited{
+.sanpham a:visited {
     color: black;
 }
 
-.Main .sanpham .p-img{
+.Main .sanpham .p-img {
     display: block;
     width: 100%;
     height: 200px;
@@ -96,15 +70,15 @@
     border-radius: 20px 20px 0 0;
 }
 
-.Main .sanpham img{
+.Main .sanpham img {
     max-width: 100%;
     max-height: 100%;
     vertical-align: middle;
-    margin-bottom:  3.5px;
+    margin-bottom: 3.5px;
     border-radius: 15px;
 }
 
-.Main .sanpham .p-name{
+.Main .sanpham .p-name {
     display: block;
     text-decoration: none;
     font-weight: bold;
@@ -114,8 +88,8 @@
     line-height: 20px;
 }
 
-.Main div.sanpham{
-    float:left;
+.Main div.sanpham {
+    float: left;
 }
 
 .Main .gia {
@@ -125,7 +99,7 @@
     margin-top: 0px;
 }
 
-.Main .giacu{
+.Main .giacu {
     margin-top: 0px;
     text-decoration: line-through;
     font-size: 80%;
@@ -148,22 +122,45 @@
     opacity: 0.7;
 }
 
-.Main .sanpham .hethang{
+.Main .sanpham .hethang {
     background-image: linear-gradient(135deg, #A4A4A4, #5A5A5A);
     cursor: inherit;
 }
 
-.Main .sanpham .hethang:hover{
+.Main .sanpham .hethang:hover {
     opacity: 1;
 }
 
-.Main .sotrang{
+.Main .xemtatca {
+    float: right;
+    font-size: 20px;
+    padding-top: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: dodgerblue;
+    margin-top: 10px;
+    margin-right: -15px;
+}
+
+.Main .sotrang {
     width: 100%;
     text-align: center;
     margin-top: 40px;
 }
 
-.sotrang .so{
+.Main .advsearch {
+    position: absolute;
+    background-image: linear-gradient(135deg, #DD4920, #e63188);
+    color: whitesmoke;
+    font-size: 1.2em;
+    padding: 10px;
+    border-radius: 15px;
+    top: -70%;
+    right: 25%;
+    outline: none;
+}
+
+.sotrang .so {
     display: inline-block;
     background-color: white;
     width: 40px;
@@ -173,99 +170,106 @@
     margin: 2px;
 }
 
-.so a{
+.so a {
     text-decoration: none;
     color: royalblue;
 }
 
-.so a:visited{
+.so a:visited {
     color: blue;
 }
 
-.sotrang .currentpage{
+.sotrang .currentpage {
     background-color: lightcoral;
     color: white;
 }
 
-.sotrang .currentpage a:hover{
+.sotrang .currentpage a:hover {
     color: white;
 }
 
-/*For small screen*/
-@media only screen and (max-width: 1200px){
-    .Main .sanpham button{
-        padding: 10px;
-        font-size: 12px;
-    }
-}
-@media only screen and (max-width: 1000px){
-    .Main .title{
-        font-size: 70%;
-    }
-    
-    .Main .xemtatca{
-        font-size: 40%;
-    }
+#advsearch .tieude {
+    font-size: 1.2em;
+    font-weight: 600;
 }
 
-@media only screen and (max-width: 770px){
-    .Main .container{
+#advsearch .luachon {
+    border-radius: 5px;
+    border: 2px solid #DD4920;
+    outline: none;
+    width: 150px;
+}
+
+
+/*For small screen*/
+
+@media only screen and (max-width: 770px) {
+    .Main .container {
         margin-left: 2%;
     }
-    
-    .Main .sanpham{
+    .Main .sanpham {
         width: 40%;
     }
-    
-    .Main .gia{
+    .Main .gia {
         padding-top: 5%;
     }
-    
-    .Main .sanpham .p-name{
+    .Main .sanpham .p-name {
         font-size: 18px;
+    }
+    
+    .Main .advsearch {
+        margin-top: -17.5%;
+        margin-right: -25%;
+    }
+    
+    #advsearch .row:first-child{
+        width: 30%;
+        float: left;
+    }
+    
+    #advsearch .row:last-child{
+        width: 70%;
+        float: right;
+    }
+    
+    #advsearch .luachon{
+        width: 100px;
     }
 }
 
 @media only screen and (max-width: 550px) {
-    .Main h1{
+    .Main h1 {
         font-size: 200%;
         text-align: center;
     }
-    
-    .Main .xemtatca{
+    .Main .xemtatca {
         padding-top: 5px;
         font-size: 70%;
     }
-    
-    .Main .sanpham{
+    .Main .sanpham {
         width: 40%;
         font-size: 10px;
     }
-    
-    .Main .sanpham .p-img{
+    .Main .sanpham .p-img {
         height: 100px;
         line-height: 100px;
         padding-bottom: 1px;
     }
-    
-    .Main .sanpham .p-name{
+    .Main .sanpham .p-name {
         font-size: 100%;
         height: 30px;
         line-height: 15px;
     }
-    
-    .Main .gia{
+    .Main .gia {
         font-size: 120%;
-        margin:0;
+        margin: 0;
         padding-bottom: 10px;
     }
-    
-    .Main .giacu{
+    .Main .giacu {
         margin-left: 5px;
         font-size: 100%;
     }
-    
-    .Main .sanpham button{
+    .Main .sanpham button {
         padding: 9px;
         font-size: 13px;
     }

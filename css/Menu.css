@@ -1,8 +1,8 @@
-.sticky-top{
+.sticky-top {
     z-index: 50;
 }
 
-.navbar{
+.navbar {
     margin-top: 30px;
 }
 
@@ -15,7 +15,7 @@
     margin-top: 0;
 }
 
-.nav-pills{
+.nav-pills {
     margin-top: -8px;
 }
 
@@ -75,20 +75,22 @@
     background-color: lightgrey;
 }
 
+
 /*For small screen*/
+
 @media only screen and (max-width: 1200px) {
-    .nav-link{
+    .nav-link {
         padding: 15px 15px;
     }
 }
+
 @media only screen and (max-width: 600px) {
-    .sticky-top{
+    .sticky-top {
         position: static;
     }
-    .nav-link{
-        padding: 10px; 10px;
+    .nav-link {
+        padding: 10px 10px;
     }
-    
     .dropdown-menu {
         top: 80%;
         left: -10%;

@@ -146,8 +146,21 @@ html, body {
             include("trangchu.php");
         else if(isset($_GET['site']))
         {
-            if($_GET['site'] != "GioHang")
+            if($_GET['site'] != "GioHang") {
+                $site = $_GET['site'];
+                switch ($site) {
+                    case 'thucung':
+                    case 'cho': 
+                    case 'meo': 
+                    case 'dongvatkhac': 
+                    case 'chim': 
+                    case 'ca': 
+                    case 'hamster': 
+                        include("timkiemnangcao.php");
+                        break;
+                    }
                 include($_GET['site'].".php");
+            }
         }
     ?>
     <div class="clear"></div>

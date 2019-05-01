@@ -3,6 +3,9 @@
     if(isset($_GET['site']))
     {
         $site = $_GET['site'];
+        
+        if($site == "thucung")
+            $sql = "SELECT COUNT(*) AS numproducts FROM (SELECT sp.*, GROUP_CONCAT(sdt.madv) AS madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp GROUP BY masp) AS t";
         if($site == "cho")
             $sql = $sql . " WHERE madv='dog'";
         if($site == "meo")
@@ -16,15 +19,35 @@
     }
     if (isset($_GET['menu']))
     {
-        if($_GET['menu'] == 0)
-            $sql = $sql;
+        if(isset($_GET['site']) && $_GET['menu'] != 0)
+            if($_GET['site'] == "thucung")
+                $sql = $sql . " WHERE";
+            else
+                $sql = $sql . " AND";
         if($_GET['menu'] == 1)
-            $sql = $sql . " AND matl='food'";
+            $sql = $sql . " matl='food'";
         if($_GET['menu'] == 2)
-            $sql = $sql . " AND matl='stuff'";
+            $sql = $sql . " matl='stuff'";
         if($_GET['menu'] == 3)
-            $sql = $sql . " AND matl='bed'";
+            $sql = $sql . " matl='bed'";
     }
+    if (isset($_GET['pricefrom']) && isset($_GET['priceto'])) {
+        $giatu = $_GET['pricefrom'];
+        $giaden = $_GET['priceto'];
+        if($giatu != "" || $giaden != ""){
+            if (strpos($sql,"WHERE") === false)
+                $sql = $sql . " WHERE";
+            else
+                $sql = $sql . " AND";
+            if ($giatu != "" && $giaden == "")
+                $sql = $sql . " giatien >= " . $giatu;
+            if ($giaden != "" && $giatu == "")
+                $sql = $sql . " giatien <= " . $giaden;
+            if ($giatu != "" && $giaden != "")
+                $sql = $sql . " (giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
+        }
+    }
+
     if(isset($_GET['key'])) //Phần tìm kiếm
     {
         $key = $_GET['key'];
@@ -36,19 +59,35 @@
                 $where = $where."madv LIKE '%".$_GET['thucung']."%'";
                 $testwhere=0;
             }
-            if($_GET['theloai'] != "all" && $testwhere == 1){
+            if($_GET['danhmuc'] != "all" && $testwhere == 1){
                 $where = $where."matl LIKE '%".$_GET['theloai']."%'";
                 $testwhere=0;
             }
-            else if($_GET['theloai'] != "all" && $testwhere == 0){
+            else if($_GET['danhmuc'] != "all" && $testwhere == 0){
                 $where = $where." AND matl LIKE '%".$_GET['theloai']."%'";
             }
+            $giatu = $_GET['giatu'];
+            $giaden = $_GET['giaden'];
             if($testwhere == 1){
-                $where = $where."giatien BETWEEN ".$_GET['giatu']." AND ".$_GET['giaden'];
+                if($giatu != "" || $giaden != ""){
+                    if ($giatu != "" && $giaden == "")
+                        $where = $where."giatien >= ".$giatu;
+                    if ($giaden != "" && $giatu == "")
+                        $where = $where . " giatien <= " . $giaden;
+                    if ($giatu != "" && $giaden != "")
+                        $where = $where . " (giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
+                }
                 $testwhere=0;
             }
             else if($testwhere == 0){
-                $where = $where."AND giatien BETWEEN ".$_GET['giatu']." AND ".$_GET['giaden'];
+                if($giatu != "" || $giaden != ""){
+                    if ($giatu != "" && $giaden == "")
+                        $where = $where." AND giatien >= ".$giatu;
+                    if ($giaden != "" && $giatu == "")
+                        $where = $where . " AND giatien <= " . $giaden;
+                    if ($giatu != "" && $giaden != "")
+                        $where = $where . " AND (giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
+                }
             }
             $sql = $sql.$where;
         }
