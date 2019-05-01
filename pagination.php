@@ -60,11 +60,11 @@
                 $testwhere=0;
             }
             if($_GET['danhmuc'] != "all" && $testwhere == 1){
-                $where = $where."matl LIKE '%".$_GET['theloai']."%'";
+                $where = $where."matl LIKE '%".$_GET['danhmuc']."%'";
                 $testwhere=0;
             }
             else if($_GET['danhmuc'] != "all" && $testwhere == 0){
-                $where = $where." AND matl LIKE '%".$_GET['theloai']."%'";
+                $where = $where." AND matl LIKE '%".$_GET['danhmuc']."%'";
             }
             $giatu = $_GET['giatu'];
             $giaden = $_GET['giaden'];
