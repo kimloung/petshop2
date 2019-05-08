@@ -134,11 +134,17 @@
     }
 
     // tao lien ket den trang truoc & trang sau, trang dau, trang cuoi
-    if ($pageNum > 1)
+    if ($pageNum > 1 && $pageNum < 5)
     {
         $page  = $pageNum - 1;
         $prev  = "<a title='Trang trước' href='".$link."&page=".$page."'><div class='so'>&lsaquo;</div></a>";
-        $first = "<a title='Trang đầu' href='".$link."&page=1'><div class='so'>&laquo;</div></a>";
+        $first = "";
+    }
+    else if ($pageNum > 1 && $pageNum >= 5)
+    {
+        $page  = $pageNum - 1;
+        $prev  = "<a title='Trang trước' href='".$link."&page=".$page."'><div class='so'>&lsaquo;</div></a>";
+        $first = "<a title='Trang đầu' href='".$link."&page=1'><div class='so'>1</div></a>";
     }
     else
     {
@@ -146,11 +152,17 @@
        $first = ""; // va lien ket trang dau
     }
 
-    if ($pageNum < $maxPage)
+    if ($pageNum < $maxPage && $maxPage-$pageNum <= 3)
     {
         $page = $pageNum + 1;
         $next  = "<a title='Trang kế' href='".$link."&page=".$page."'><div class='so'>&rsaquo;</div></a>";
-        $last = "<a title='Trang cuối' href='".$link."&page=".$maxPage."'><div class='so'>&raquo;</div></a>";
+        $last = "";
+    }
+    else if ($pageNum < $maxPage && $maxPage-$pageNum > 3)
+    {
+        $page = $pageNum + 1;
+        $next  = "<a title='Trang kế' href='".$link."&page=".$page."'><div class='so'>&rsaquo;</div></a>";
+        $last = "<a title='Trang cuối' href='".$link."&page=".$maxPage."'><div class='so'>" .$maxPage. "</div></a>";
     }
     else
     {
@@ -160,7 +172,7 @@
 
     if($numproducts > $productsPerPage){
         echo "<div class='sotrang'>";
-        echo $first . $prev . $nav . $next . $last;
+        echo $prev . $first . $nav . $last . $next;
         echo "</div>";
     }
  ?>
