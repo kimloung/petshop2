@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+.menu {
+    height: 100%;
+    width: 250px;
+    background-color: #111;
+	position: fixed;
+	left: 0;
+	top:0;
+    z-index: 3;
+}
+
+.menu-content div, .submenu a{
+    padding: 15px 10px 15px 10px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #818181;
+    display: block;
+}
+
+#MENU1 a, #MENU2 a, #MENU3 a{
+    font-size: 17px;
+}
+
+.menu-content div:hover, .submenu a:hover {
+    color: #f1f1f1;
+}
+
+.menu .admin-logo{
+    width: 100%;
+    background-image: linear-gradient(to bottom, #A70045 0%, #111 100%);
+}
+
+.menu .current{
+    color: #A70045;
+    border-left: groove #A70045;
+}
+
+.menu .current:hover{
+    color: #A70045;
+    cursor: url('http://www.snazzyspace.com/cursorsfolder/dog-paw.png'), auto;
+}
+
+.main{
+	margin-left: 250px;
+}
+
+@media only screen and (max-width: 600px){
+    .menu{
+        width: 100%;
+        top: 50px;
+    }
+    
+    .menu-content{
+        padding: 0 29%;
+    }
+    
+    .main{
+        width: 100%;
+        margin-left: 0;
+    }
+}

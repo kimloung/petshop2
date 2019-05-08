@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+.header{
+    height: 50px;
+    z-index: 3;
+    left: 250px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-image: linear-gradient(135deg, #A70045 0%, #6100FF 100%);
+    box-shadow: 0px 4px 2px -2px rgba(0,0,0,.3);
+}
+
+.header .logo{
+    height: 100%;
+    float: left;
+    margin-left: 10px;
+}
+
+.header .logo img{
+    height: 100%;
+}
+
+.menubtn{
+    float: left;
+    position: relative;
+    top: 5px;
+    left: 15px;
+}
+
+.menubtn button{
+    font-size: 20px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    outline: none;
+}
+
+.menubtn button:hover{
+    background-image: linear-gradient(to bottom, #A70045, #FF0076);
+    cursor: pointer;
+}
+
+.thongtindangnhap{
+    float: right;
+    height: 100%;
+    padding: 2px;
+    margin-right: 2%;
+}
+
+.thongtindangnhap .avatar{
+    width: 45px;
+    height: 45px;
+    float: left;
+    display: inline-block;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.avatar img{
+    border-radius: 5px;
+}
+
+.thongtindangnhap .tennv{
+    float: left;
+    display: inline-block;
+    color: white;
+}
+
+.avatar:hover, .tennv:hover{
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    background-color: #6100FF;
+    z-index: 3;
+}
+
+.dropdown-item {
+    font-weight: 500;
+    color: white;
+}
+
+.dropdown-item:hover{
+    background-image: linear-gradient(to right, #0B00A4, #0093FF);
+    color: white;
+}
+
+.main{
+    margin-top: 50px;
+}
+
+@media only screen and (max-width: 600px){
+    .header{
+        left: 0;
+    }
+}
