@@ -8,7 +8,7 @@
             <strong>Đỗ Tường Đại </strong><i class="fas fa-angle-down"></i>
         </div>
         <div class="dropdown-menu">
-            <a href="quantri.php?site=thongtincanhan" class="dropdown-item"><i class="fa fa-id-card"></i> Thông tin cá nhân</a>
+            <a href="thongtincanhan.php" class="dropdown-item" onClick="ttcn()"><i class="fa fa-id-card"></i> Thông tin cá nhân</a>
             <a href="/petshop/admin" class="dropdown-item" onClick="signout()"><i class="fas fa-power-off"></i> Đăng xuất</a>
         </div>
     </div>
@@ -24,5 +24,13 @@
             document.getElementById("Header").style.left = 0;
             document.getElementById("Main").style.marginLeft = 0;
         }
+    }
+    
+    function ttcn(){
+        location.href = 'thongtincanhan.php';
+    }
+    
+    function signout(){
+        location.href = 'index.php';
     }
 </script>
