@@ -25,7 +25,6 @@
     <link href="css/SanPham.css" rel="stylesheet" type="text/css">
     <link href="css/SiteDangKi.css" rel="stylesheet" type="text/css">
     <link href="css/view_cart.css" rel="stylesheet" type="text/css">
-    <link href="css/thongtin.css" rel="stylesheet" type="text/css">
     <link href="css/donhang.css" rel="stylesheet" type="text/css">
 
     <script src="js/Scroll_on_Top.js"></script>
@@ -162,7 +161,6 @@ html, body {
                     case 'chim': 
                     case 'ca': 
                     case 'hamster': 
-                    case 'timkiem':
                         include("timkiemnangcao.php");
                         break;
                     }

@@ -15,6 +15,8 @@
     }
 ?>
 
+<head><link href="css/thongtin.css" rel="stylesheet" type="text/css"></head>
+
 <div id="thongtincanhan">
     <div class="content">
         <form name="form1" id="thongtin1" method="post">
