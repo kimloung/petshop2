@@ -1,12 +1,24 @@
 <?php
+    include 'accesssale.php';
     require '../DataProvider.php';
+    require '../ProductsPerPage.inc';
 ?>
 
 <?php
     if (isset($_POST['masp']) && isset($_POST['giakhuyenmai'])){
-        $sql = "INSERT INTO spkhuyenmai(masp, giakhuyenmai) VALUES ('".$_POST['masp']."', ".$_POST['giakhuyenmai'].")";
-        DataProvider::executeQuery($sql);
-        echo "<script type='text/javascript'>alert('Thêm sản phẩm giảm giá thành công!');</script>";
+        $sql1="SELECT masp FROM spkhuyenmai WHERE masp='".$_POST['masp']."'";
+		$ktspkm=DataProvider::executeQuery($sql1);
+        
+        if(mysqli_num_rows($ktspkm) >0)
+		{
+			echo "<script language='javascript'> ;alert('Sản phẩm giảm giá đã tồn tại!!!'); history.go(-1);</script>";
+		}
+        else
+        {
+            $sql = "INSERT INTO spkhuyenmai(masp, giakhuyenmai) VALUES ('".$_POST['masp']."', ".$_POST['giakhuyenmai'].")";
+            DataProvider::executeQuery($sql);
+            echo "<script type='text/javascript'>alert('Thêm sản phẩm giảm giá thành công!');</script>";
+        }
     }
 
     if (isset($_POST['suamasp']) && isset($_POST['suagiakhuyenmai'])){
@@ -16,7 +28,7 @@
     }
 
     if (isset($_POST['del_id'])){
-       $sql = "DELETE FROM spkhuyenmai WHERE masp = '" .$_POST['delete_id']. "'";
+       $sql = "DELETE FROM spkhuyenmai WHERE masp = '" .$_POST['del_id']. "'";
        DataProvider::executeQuery($sql);
     }
 ?>
@@ -122,8 +134,8 @@ html, body {
         <tbody>
             <?php
                 $sql = "SELECT sp.*, km.giakhuyenmai FROM sanpham AS sp JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE xoa=0";
+                $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
-                $color=0;
                 while ($row = mysqli_fetch_array($result))
                 {
                     echo "<tr>";
@@ -134,7 +146,7 @@ html, body {
                     echo "  <td>" .$row["giakhuyenmai"]. "</td>";
                     echo "  <td>";
                     echo "  <button class='sua_sp' onClick=\"edit('".$row["masp"]."','".$row["giatien"]."','".$row["giakhuyenmai"]."')\">Sửa</button>";
-                    echo "  <form method='post' onSubmit='return xoavinhvien_sp()' action='thongtinsanpham.php'>";
+                    echo "  <form method='post' onSubmit='return xoavinhvien_sp()' action=''>";
                     echo "      <input type='hidden' name='del_id' value='" . $row["masp"] . "'>";
                     echo "      <input type='submit' value='Xóa' class='xoa_sp'>";
                     echo "  </form>";
@@ -145,6 +157,11 @@ html, body {
         </tbody>
     </table>
 
+    <?php
+        $sql   = "SELECT COUNT(*) AS numproducts FROM spkhuyenmai";
+        include 'pagination.php';
+    ?>
+    
     <div style="clear: both"></div>
     <!-- popup thêm sp -->
     <div class="popup-themsp">

@@ -1,4 +1,5 @@
 <?php
+    include 'accesssale.php';
     require '../DataProvider.php';
     require '../ProductsPerPage.inc';
 ?>
@@ -10,6 +11,30 @@
     }
 
     if (isset($_POST['delete_id'])){
+        
+        $sql1="SELECT * FROM spmoi WHERE masp = '" .$_POST['delete_id']. "'";
+        $ktspmoi=DataProvider::executeQuery($sql1);
+        if(mysqli_num_rows($ktspmoi) >= 1)
+        {
+            $sql = "DELETE FROM spmoi WHERE masp = '" .$_POST['delete_id']. "'";
+            DataProvider::executeQuery($sql);
+        }
+        $sql2="SELECT * FROM spkhuyenmai WHERE masp = '" .$_POST['delete_id']. "'";
+        $ktspkhuyenmai=DataProvider::executeQuery($sql2);
+
+        if(mysqli_num_rows($ktspkhuyenmai) >= 1)
+        {
+            $sql = "DELETE FROM spkhuyenmai WHERE masp = '" .$_POST['delete_id']. "'";
+            DataProvider::executeQuery($sql);
+        }
+        $sql3="SELECT * FROM spkhuyenmai WHERE masp = '" .$_POST['delete_id']. "'";
+        $ktphanloaisp=DataProvider::executeQuery($sql3);
+
+        if(mysqli_num_rows($ktphanloaisp) >= 1)
+        {
+            $sql = "DELETE FROM sp_dv_tl WHERE masp = '" .$_POST['delete_id']. "'";
+            DataProvider::executeQuery($sql);
+        }
        $sql = "DELETE FROM sanpham WHERE masp = '" .$_POST['delete_id']. "'";
        DataProvider::executeQuery($sql);
     }
@@ -116,7 +141,6 @@ html, body {
                 $sql = "SELECT * FROM sanpham WHERE xoa=1";
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
-                $color=0;
                 while ($row = mysqli_fetch_array($result))
                 {
                     echo "<tr>";

@@ -1,4 +1,5 @@
 <?php
+    include 'accesssale.php';
     require '../DataProvider.php';
     require '../ProductsPerPage.inc';
 ?>
@@ -131,7 +132,6 @@ html, body {
                 }
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
-                $color=0;
                 while ($row = mysqli_fetch_array($result))
                 {
                     echo "<tr id='".$row["masp"]."'>";
@@ -169,7 +169,7 @@ html, body {
     <div class="popup-themsp">
         <div class="popup-themsp__content">
             <div class="popup-themsp__title">THÊM PHÂN LOẠI SẢN PHẨM</div>
-            <form method="post" action="">
+            <form method="post" action="" style="margin-top: 100px">
                 <div class="popup-themsp-left">
                     <div class="popup-themsp-left__label">Nhập mã sản phẩm</div>
                     <div class="popup-themsp-left__label">Chọn thú cưng</div>
@@ -202,10 +202,10 @@ html, body {
     <!-- popup sửa sp -->
      <div class="popup-themsp">
         <div class="popup-themsp__content">
-            <form method="post" action="">
+            <div class="popup-themsp__title">SỬA PHÂN LOẠI SẢN PHẨM</div>
+            <form method="post" action="" style="margin-top: 100px">
                 <input type="hidden" id="madvcu" name="madvcu">
                 <input type="hidden" id="matlcu" name="matlcu">
-                <div class="popup-themsp__title">SỬA PHÂN LOẠI SẢN PHẨM</div>
                 <div class="popup-themsp-left">
                      <div class="popup-themsp-left__label">Mã sản phẩm</div>
                     <div class="popup-themsp-left__label">Chọn thú cưng</div>

@@ -1,40 +1,58 @@
 <?php
+    include 'accesssale.php';
     require '../DataProvider.php';
     require '../ProductsPerPage.inc';
 ?>
 
 <?php
     if (isset($_POST['masp']) && isset($_POST['tensp']) && isset($_POST['giatien']) && isset($_POST['mota'])){
-        $errors= array();
-        $file_name = $_FILES['hinhanh']['name'];
-        $file_size =$_FILES['hinhanh']['size'];
-        $file_tmp =$_FILES['hinhanh']['tmp_name'];
-        $file_type=$_FILES['hinhanh']['type'];
-        $file_tail = explode('.',$_FILES['hinhanh']['name']);
-        $file_ext=strtolower(end($file_tail));
+        $sql1="SELECT masp FROM sanpham WHERE masp='".$_POST['masp']."'";
+		$ktusername=DataProvider::executeQuery($sql1);
+        
+        if(mysqli_num_rows($ktusername) >0)
+		{
+			echo "<script language='javascript'> ;alert('Mã sản phẩm đã tồn tại!!! Vui lòng chọn mã khác.'); history.go(-1);</script>";
+		}
+        else
+        {
+            $errors= array();
+            $file_name = $_FILES['hinhanh']['name'];
+            $file_size =$_FILES['hinhanh']['size'];
+            $file_tmp =$_FILES['hinhanh']['tmp_name'];
+            $file_type=$_FILES['hinhanh']['type'];
+            $file_tail = explode('.',$_FILES['hinhanh']['name']);
+            $file_ext=strtolower(end($file_tail));
 
-        $expensions= array("jpeg","jpg","png");
+            $expensions= array("jpeg","jpg","png");
 
-        if(in_array($file_ext,$expensions)=== false){
-            $errors[]="Không chấp nhận định dạng ảnh có đuôi này, mời bạn chọn JPEG hoặc PNG.";
-        }
+            if(in_array($file_ext,$expensions)=== false){
+                $errors[]="Không chấp nhận định dạng ảnh có đuôi này, mời bạn chọn JPEG hoặc PNG.";
+                echo "<script language='javascript'> ;alert('Chỉ chấp nhận file JPEG hoặc JPG hoặc PNG!!!'); history.go(-1);</script>";
+            }
 
-        if($file_size > 5242880){
-            $errors[]='Kích cỡ file nên dưới 5 MB';
-        }
+            if($file_size > 5242880){
+                $errors[]='Kích cỡ file nên dưới 5 MB';
+                echo "<script language='javascript'> ;alert('Kích cỡ file nên dưới 5 MB!!!'); history.go(-1);</script>";
+            }
 
-        if(empty($errors)==true){
-            move_uploaded_file($file_tmp,"../images/sanpham/".$file_name);
+            if(empty($errors)==true){
+                move_uploaded_file($file_tmp,"../images/sanpham/".$file_name);
+            }
+            $sql2="SELECT * FROM spmoi";
+            $ktspmoi=DataProvider::executeQuery($sql2);
+
+            if(mysqli_num_rows($ktspmoi) > 8)
+            {
+                $sql = "DELETE FROM spmoi LIMIT 1";
+                DataProvider::executeQuery($sql);
+            }
+            $sql = "INSERT INTO sanpham(masp, tensp, hinhanh, soluong, giatien, mota, xoa) VALUES ('".$_POST['masp']."', '".$_POST['tensp']."', '".$file_name."', ".$_POST['soluong'].", ".$_POST['giatien'].", '".$_POST['mota']."', 0)";
+            DataProvider::executeQuery($sql);
+            $sql = "INSERT INTO sp_dv_tl(masp, madv, matl) VALUES ('".$_POST['masp']."', '".$_POST['thucung']."', '".$_POST['danhmuc']."')";
+            DataProvider::executeQuery($sql);
+            $sql = "INSERT INTO spmoi(masp) VALUES('".$_POST['masp']."')";
+            DataProvider::executeQuery($sql);
         }
-        else{
-            print_r($errors);
-        }
-        $sql = "DELETE FROM spmoi LIMIT 1";
-        DataProvider::executeQuery($sql);
-        $sql = "INSERT INTO sanpham(masp, tensp, hinhanh, soluong, giatien, mota, xoa) VALUES ('".$_POST['masp']."', '".$_POST['tensp']."', '".$file_name."', ".$_POST['soluong'].", ".$_POST['giatien'].", '".$_POST['mota']."', 0)";
-        DataProvider::executeQuery($sql);
-        $sql = "INSERT INTO spmoi(masp) VALUES('".$_POST['masp']."')";
-        DataProvider::executeQuery($sql);
     }
 
     if (isset($_POST['del_id'])){
@@ -158,7 +176,6 @@ html, body {
                 $sql = "SELECT * FROM sanpham WHERE xoa=0";
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
-                $color=0;
                 while ($row = mysqli_fetch_array($result))
                 {
                     echo "<tr>";
@@ -197,6 +214,8 @@ html, body {
                     <div class="popup-themsp-left__label">Nhập tên sản phẩm</div>
                     <div class="popup-themsp-left__label">Nhập giá</div>
                     <div class="popup-themsp-left__label">Nhập số lượng</div>
+                    <div class="popup-themsp-left__label">Chọn thú cưng</div>
+                    <div class="popup-themsp-left__label">Chọn danh mục</div>
                     <div class="popup-themsp-left__label">Chọn hình</div>
                     <div class="popup-themsp-left__label">Nhập mô tả</div>
                 </div>
@@ -205,8 +224,24 @@ html, body {
                     <div class="popup-themsp-left__input"><input class="them-ten them-mot-sp" name="tensp" type="text" placeholder="Tên sản phẩm"></div>
                     <div class="popup-themsp-left__input"><input class="them-gia them-mot-sp" name="giatien" type="number" placeholder="Giá" min="0" oninput="validity.valid||(value='');"></div>
                     <div class="popup-themsp-left__input"><input class="them-gia them-mot-sp" name="soluong" type="number" placeholder="Số lượng" min="0" oninput="validity.valid||(value='');"></div>
+                    <div class="popup-themsp-left__input">
+                        <select name="thucung">
+                            <option value="dog">Chó</option>
+                            <option value="cat">Mèo</option>
+                            <option value="bird">Chim</option>
+                            <option value="fish">Cá</option>
+                            <option value="hamster">Hamster</option>
+                        </select>
+                    </div>
+                    <div class="popup-themsp-left__input">
+                        <select name="danhmuc">
+                            <option value="food">Thức ăn</option>
+                            <option value="stuff">Vật dụng</option>
+                            <option value="bed">Giường, chuồng</option>
+                        </select>
+                    </div>
                     <div class="popup-themsp-left__input"><input class="them-hinh them-mot-sp" name="hinhanh" type="file" accept=".jpeg,.jpg,.png"></div>
-                    <div class="popup-themsp-left__input"><textarea class="them-mot-sp" name="mota" cols="40" rows="10" form="themsp"></textarea></div>
+                    <div class="popup-themsp-left__input"><textarea class="them-mot-sp" name="mota" cols="40" rows="5" form="themsp"></textarea></div>
                 </div>
                 <div class="clear"></div>
                 <input type="submit" class="popup-themsp__btn" value="Thêm">

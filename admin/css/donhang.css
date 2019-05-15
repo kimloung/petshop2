@@ -78,11 +78,8 @@ table tbody td {
 	text-align: center;
 	font-size: 20px;
 	padding: 30px;
-	background-color: #B2FD24;
-}
-
-.popup-dh__title:hover {
-	background-color: #DCFF4D;
+	background-image: linear-gradient(135deg, #A70045 0%, #6100FF 100%);
+    color: white
 }
 
 .popup-dh-left{
@@ -101,6 +98,10 @@ table tbody td {
 	height: 35px;
 }
 
+.popup-dh-left__label{
+    font-weight: bold;
+}
+
 .popup-dh-left__input input{
 	border:0;
 	margin-top: 0;
@@ -117,7 +118,7 @@ input[type=checkbox]{
 
 .popup-dh__btn{
 	position: relative;
-	background: #2FB016;
+	background-image: linear-gradient(135deg, #A70045 0%, #6100FF 100%);
 	border: 1px solid #CBCBCB;
 	padding: 20px;
 	font-size:20px;
@@ -125,12 +126,11 @@ input[type=checkbox]{
 	color: white;
 	transition: 0.3s;
 	border-radius: 10px;
-	margin-top: 20px;
+	margin-top: 100px;
 	left: 140px;
 }
 
 .popup-dh__btn:hover{
-	background: #3B872C;
 	cursor: pointer;
 }
 

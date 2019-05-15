@@ -1,16 +1,12 @@
 <?php
+    include 'accessadmin.php';
     require '../DataProvider.php';
     require '../ProductsPerPage.inc';
 ?>
 
 <?php
-    if (isset($_POST['masp']) && isset($_POST['tensp']) && isset($_POST['giatien']) && isset($_POST['hinhanh']) && isset($_POST['mota'])){
-        $sql = "INSERT INTO sanpham(masp, tensp, hinhanh, soluong, giatien, mota, xoa) VALUES ('".$_POST['masp']."', '".$_POST['tensp']."', '".$_POST['hinhanh']."', 100, ".$_POST['giatien'].", '".$_POST['mota']."', 0)";
-        DataProvider::executeQuery($sql);
-    }
-
-    if (isset($_POST['del_id'])){
-       $sql = "UPDATE sanpham SET xoa=1 WHERE masp = '" .$_POST['del_id']. "'";
+    if (isset($_POST['unlock_id'])){
+       $sql = "UPDATE taikhoan SET khoa=0 WHERE tendangnhap = '" .$_POST['unlock_id']. "'";
        DataProvider::executeQuery($sql);
     }
 ?>
@@ -101,7 +97,6 @@ html, body {
                 <th>Tên đăng nhập</th>
                 <th>Họ tên</th>
                 <th>Vai trò</th>
-                <th>Giới tính</th>
                 <th>Ngày sinh</th>
                 <th>Điện thoại</th>
                 <th>Email</th>
@@ -109,37 +104,37 @@ html, body {
             </tr>
         </thead>
         <tbody>
-            <tr></tr>
+            <?php
+                $sql = "SELECT * FROM taikhoan AS tk JOIN vaitro AS vt ON tk.mavt = vt.mavt WHERE tk.khoa=1";
+                $sql = $sql . " LIMIT $offset, $productsPerPage";
+                $result = DataProvider::executeQuery($sql);
+                while ($row = mysqli_fetch_array($result))
+                {
+                    echo "<tr>";
+					echo "  <td>" .$row["tendangnhap"]. "</td>";
+                    echo "  <td>" .$row["hoten"]. "</td>";
+                    echo "  <td>" .$row["vaitro"]. "</td>";
+					echo "	<td>" .$row["ngaysinh"]. "</td>";
+                    echo "  <td>0" .$row["dienthoai"]. "</td>";
+                    echo "  <td>" .$row["email"]. "</td>";
+                    echo "  <td>";
+                    echo "      <form method='post' onSubmit='return mokhoa()' action=''>";
+                    echo "          <input type='hidden' name='unlock_id' value='" . $row["tendangnhap"] . "'>";
+                    echo "          <input type='submit' value='Mở khóa' class='xoa_user' style='width: 80px'>";
+                    echo "      </form>";
+                    echo "  </td>";
+                    echo "</tr>";
+                }
+            ?>
         </tbody>
     </table>
+    
+    <?php
+        $sql   = "SELECT COUNT(*) AS numproducts FROM taikhoan WHERE khoa=1";
+        include 'pagination.php';
+    ?>
 
     <div style="clear: both"></div>
-
-    <div class="popup-themuser">
-        <div class="popup-themuser__content">
-            <div class="popup-themuser__title">Sửa User</div>
-            <div class="popup-themuser-left">
-                <div class="popup-themuser-left__label">STT</div>
-                <div class="popup-themuser-left__label">Tên đăng nhập</div>
-                <div class="popup-themuser-left__label">Họ và tên</div>
-                <div class="popup-themuser-left__label">Giới Tính</div>
-                <div class="popup-themuser-left__label">Ngày Sinh</div>
-                <div class="popup-themuser-left__label">SĐT</div>
-            </div>
-            <div class="popup-themsp-right">
-                <div class="popup-themuser-left__input"><input class="sua-user" type="text" readonly="" style="cursor: default"></div>
-                <div class="popup-themuser-left__input"><input class="sua-user" type="text"></div>
-                <div class="popup-themuser-left__input"><input class="sua-user" type="text"></div>
-                <div class="popup-themuser-left__input"><input class="sua-user" type="text"></div>
-                <div class="popup-themuser-left__input"><input class="sua-user" type="text"></div>
-                <div class="popup-themuser-left__input"><input class="sua-user" type="text"></div>
-            </div>
-            <button class="popup-themuser__btn" onclick="sua_thong_tin_user()">Sửa</button>
-            <span class="back" onclick="close_popup_themuser()">&times;</span>
-        </div>
-    </div>
-
-    <script>window.onload=load_quan_ly_user(); xoa_user()</script>
 </div>
 </body>
 </html>

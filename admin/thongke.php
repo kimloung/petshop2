@@ -1,4 +1,5 @@
 <?php
+    include 'accesssale.php';
     require '../DataProvider.php';
 ?>
 
@@ -83,7 +84,7 @@ html, body {
         <div class="muc sanpham">
             <div class="muc-soluong">
                 <?php
-                    $sql = "SELECT COUNT(*) AS numproducts FROM sanpham";
+                    $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon";
                     $result = DataProvider::executeQuery($sql);
                     $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     $numproducts = $product['numproducts'];
@@ -97,7 +98,7 @@ html, body {
         <div class="muc khachhang">
             <div class="muc-soluong">
                 <?php
-                    $sql = "SELECT COUNT(*) AS numproducts FROM taikhoan WHERE mavt='customer'";
+                    $sql = "SELECT SUM(tongtien) AS numproducts FROM hoadon";
                     $result = DataProvider::executeQuery($sql);
                     $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     $numproducts = $product['numproducts'];
@@ -111,7 +112,7 @@ html, body {
         <div class="muc donhang">
             <div class="muc-soluong">
                 <?php
-                    $sql = "SELECT COUNT(*) AS numproducts FROM hoadon";
+                    $sql = "SELECT COUNT(*) AS numproducts FROM hoadon WHERE ngaydathang='".date('Y').'/'.date('m').'/'.date('d')."'";
                     $result = DataProvider::executeQuery($sql);
                     $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     $numproducts = $product['numproducts'];
@@ -127,9 +128,7 @@ html, body {
     
     <div id="thucung" class="bieudo left"></div>
     
-    <div id="danhmuc" class="bieudo"></div>
-    
-    <div id="donhang" class="bieudo right"></div>
+    <div id="danhmuc" class="bieudo right"></div>
 
     <script type="text/javascript">
         // Load google charts
@@ -138,35 +137,35 @@ html, body {
 
         // Draw the chart and set the chart values
         <?php
-            $sql = "SELECT COUNT(*) AS numproducts FROM sanpham AS sp JOIN sp_dv_tl AS sdt ON sp.masp = sdt.masp WHERE madv = 'dog'";
+            $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon AS cthd JOIN sp_dv_tl AS sdt ON cthd.masp = sdt.masp WHERE sdt.madv = 'dog'";
             $result = DataProvider::executeQuery($sql);
             $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $cho = $product['numproducts'];
-            $sql = "SELECT COUNT(*) AS numproducts FROM sanpham AS sp JOIN sp_dv_tl AS sdt ON sp.masp = sdt.masp WHERE madv = 'cat'";
+            $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon AS cthd JOIN sp_dv_tl AS sdt ON cthd.masp = sdt.masp WHERE sdt.madv = 'cat'";
             $result = DataProvider::executeQuery($sql);
             $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $meo = $product['numproducts'];
-            $sql = "SELECT COUNT(*) AS numproducts FROM sanpham AS sp JOIN sp_dv_tl AS sdt ON sp.masp = sdt.masp WHERE madv = 'bird'";
+            $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon AS cthd JOIN sp_dv_tl AS sdt ON cthd.masp = sdt.masp WHERE sdt.madv = 'bird'";
             $result = DataProvider::executeQuery($sql);
             $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $chim = $product['numproducts'];
-            $sql = "SELECT COUNT(*) AS numproducts FROM sanpham AS sp JOIN sp_dv_tl AS sdt ON sp.masp = sdt.masp WHERE madv = 'fish'";
+            $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon AS cthd JOIN sp_dv_tl AS sdt ON cthd.masp = sdt.masp WHERE sdt.madv = 'fish'";
             $result = DataProvider::executeQuery($sql);
             $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $ca = $product['numproducts'];
-            $sql = "SELECT COUNT(*) AS numproducts FROM sanpham AS sp JOIN sp_dv_tl AS sdt ON sp.masp = sdt.masp WHERE madv = 'hamster'";
+            $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon AS cthd JOIN sp_dv_tl AS sdt ON cthd.masp = sdt.masp WHERE sdt.madv = 'hamster'";
             $result = DataProvider::executeQuery($sql);
             $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $hamster = $product['numproducts'];
-            $sql = "SELECT COUNT(*) AS numproducts FROM sanpham AS sp JOIN sp_dv_tl AS sdt ON sp.masp = sdt.masp WHERE matl = 'food'";
+            $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon AS cthd JOIN sp_dv_tl AS sdt ON cthd.masp = sdt.masp WHERE sdt.matl = 'food'";
             $result = DataProvider::executeQuery($sql);
             $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $food = $product['numproducts'];
-            $sql = "SELECT COUNT(*) AS numproducts FROM sanpham AS sp JOIN sp_dv_tl AS sdt ON sp.masp = sdt.masp WHERE matl = 'stuff'";
+            $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon AS cthd JOIN sp_dv_tl AS sdt ON cthd.masp = sdt.masp WHERE sdt.matl = 'stuff'";
             $result = DataProvider::executeQuery($sql);
             $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $stuff = $product['numproducts'];
-            $sql = "SELECT COUNT(*) AS numproducts FROM sanpham AS sp JOIN sp_dv_tl AS sdt ON sp.masp = sdt.masp WHERE matl = 'bed'";
+            $sql = "SELECT COUNT(*) AS numproducts FROM chitiethoadon AS cthd JOIN sp_dv_tl AS sdt ON cthd.masp = sdt.masp WHERE sdt.matl = 'bed'";
             $result = DataProvider::executeQuery($sql);
             $product = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $bed = $product['numproducts'];
@@ -187,15 +186,6 @@ html, body {
                 ['Vật dụng', <?php echo $stuff?>],
                 ['Giường, chuồng', <?php echo $bed?>]
             ]);
-            
-            var data3 = google.visualization.arrayToDataTable([
-                ['Task','Hours per Day'],
-                ['Đã hủy', 35349],
-                ['Đã hoàn tất', 142648],
-                ['Thất bại', 35784],
-                ['Đang tiến hành', 164051],
-                ['Đã trả lại hàng/đã hoàn tiền', 61582]
-            ]);
 
             // Optional; add a title and set the width and height of the chart
             var options1 = {
@@ -213,23 +203,12 @@ html, body {
                 backgroundColor : '#fff',
                 fontSize : 17
             };
-            
-            var options3 = {
-                title : 'Tình trạng hóa đơn',
-                width : 550,
-                height : 500,
-                backgroundColor : '#fff',
-                fontSize : 17
-            };
             // Display the chart inside the <div> element with id="piechart"
             var chart = new google.visualization.PieChart(document.getElementById('thucung'));
             chart.draw(data1, options1);
 
             var chart = new google.visualization.PieChart(document.getElementById('danhmuc'));
             chart.draw(data2, options2);
-            
-            var chart = new google.visualization.PieChart(document.getElementById('donhang'));
-            chart.draw(data3, options3);
         }
     </script>
 </div>

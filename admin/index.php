@@ -1,7 +1,6 @@
 ﻿<?php
-require('common.php');
+    session_start();
 ?>
-
 <!doctype html>
 <html>
 <head>
@@ -55,16 +54,16 @@ html, body {
         <div class="clear"></div>
         <h1 class="quantiwebsite">Quản trị website</h1>
         <div class="clear"></div>
-        <form onSubmit="return validateLogin()" action="xulydangnhap.php" method="post">
+        <form action="xulytaikhoan.php" method="post">
             <div class="input">
                 <i class="fas fa-user"></i>
-                <input type="text" name="username" id="username" placeholder="Username.." autocomplete="off">
+                <input type="text" name="taikhoan" id="username" placeholder="Username.." autocomplete="off">
             </div>
             <div class="input">
                 <i class="fas fa-key"></i>
-                <input type="password" name="password" id="password" placeholder="Password..." autocomplete="off">
+                <input type="password" name="matkhau" id="password" placeholder="Password..." autocomplete="off">
             </div>
-            <div style="margin-top: 10px;padding:10px"><input type="submit" value="Đăng nhập"></div>
+            <div style="margin-top: 10px;padding:10px"><input type="submit" name="btnlogin" value="Đăng nhập"></div>
         </form>
         <div class="clear"></div>
         <div class="forget" onClick="password_help()"><i class="fas fa-info-circle"></i> Bạn quên mật khẩu?</div>

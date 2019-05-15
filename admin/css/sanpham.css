@@ -118,7 +118,7 @@ table tbody td {
 	left: 50%;
 	background: white;
 	width: 650px;
-	height: 700px;
+	height: 750px;
 	transform: translate(-50%,-50%);
 	border-radius: 15px;
 }
@@ -173,7 +173,7 @@ input[type=checkbox]{
 	color: white;
 	transition: 0.3s;
 	border-radius: 10px;
-	margin-top: 240px;
+	margin-top: 120px;
 	left: 230px;
 }
 

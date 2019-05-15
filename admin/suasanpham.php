@@ -1,4 +1,5 @@
 <?php
+    include 'accesssale.php';
     require '../DataProvider.php';
 ?>
 
@@ -44,18 +45,40 @@
 <?php
     if(isset($_GET['masp']))
     {
-        $sql = "SELECT sp.*, GROUP_CONCAT(DISTINCT(dv.tendv)) AS tendv, GROUP_CONCAT(DISTINCT(tl.theloai)) AS theloai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp JOIN dongvat AS dv ON dv.madv = sdt.madv JOIN theloai AS tl ON tl.matl = sdt.matl WHERE sp.masp = '".$_GET['masp']."' GROUP BY sp.masp";
-        $result = DataProvider::executeQuery($sql);
-        while ($row = mysqli_fetch_array($result))
+        $sql3="SELECT * FROM spkhuyenmai WHERE masp = '" .$_GET['masp']. "'";
+        $ktphanloaisp=DataProvider::executeQuery($sql3);
+
+        if(mysqli_num_rows($ktphanloaisp) >= 1)
         {
-            $masp = $row['masp'];
-            $tensp = $row['tensp'];
-            $hinhanh = $row['hinhanh'];
-            $giatien = $row['giatien'];
-            $soluong = $row['soluong'];
-            $mota = $row["mota"];
-            $tendv = $row['tendv'];
-            $theloai = $row['theloai'];
+            $sql = "SELECT sp.*, GROUP_CONCAT(DISTINCT(dv.tendv)) AS tendv, GROUP_CONCAT(DISTINCT(tl.theloai)) AS theloai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp JOIN dongvat AS dv ON dv.madv = sdt.madv JOIN theloai AS tl ON tl.matl = sdt.matl WHERE sp.masp = '".$_GET['masp']."' GROUP BY sp.masp";
+            $result = DataProvider::executeQuery($sql);
+            while ($row = mysqli_fetch_array($result))
+            {
+                $masp = $row['masp'];
+                $tensp = $row['tensp'];
+                $hinhanh = $row['hinhanh'];
+                $giatien = $row['giatien'];
+                $soluong = $row['soluong'];
+                $mota = $row["mota"];
+                $tendv = $row['tendv'];
+                $theloai = $row['theloai'];
+            }
+        }
+        else
+        {
+            $sql = "SELECT * FROM sanpham";
+            $result = DataProvider::executeQuery($sql);
+            while ($row = mysqli_fetch_array($result))
+            {
+                $masp = $row['masp'];
+                $tensp = $row['tensp'];
+                $hinhanh = $row['hinhanh'];
+                $giatien = $row['giatien'];
+                $soluong = $row['soluong'];
+                $mota = $row["mota"];
+                $tendv = "";
+                $theloai = "";
+            }
         }
     }
 ?>
@@ -75,7 +98,7 @@
     <link href="../css/ScrollOnTop.css" rel="stylesheet" type="text/css" />
     <link href="css/Menu.css" rel="stylesheet" type="text/css" />
     <link href="css/header.css" rel="stylesheet" type="text/css" />
-    <link href='css/thongtin.css' rel='stylesheet' type='text/css' />
+    <link href='css/thongtinsanpham.css' rel='stylesheet' type='text/css' />
     
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../js/Scroll_on_Top.js"></script>
@@ -173,8 +196,8 @@ html, body {
                      <div class="popup-themsp">
                         <div class="popup-themsp__content">
                             <div class="popup-themsp__title">CHỌN HÌNH</div>
-                                <div class="popup-themsp-middle"><input class="them-hinh sua-sp" name="hinhanh" type="file" accept=".jpeg,.jpg,.png"></div>
-                            <button type="submit" class="popup-themsp__btn" onclick="sua_thong_tin_sp()">Lưu</button>
+                                <div class="popup-themsp-middle"><input class="them-hinh sua-sp" name="hinhanh" type="file" accept=".jpeg,.jpg,.png" style="margin-left: 50px"></div>
+                            <button type="submit" class="popup-themsp__btn" style="left: 10px">Lưu</button>
                             <span class="back" onclick="close_popup_themsp()">&times;</span>
                         </div>
                     </div>

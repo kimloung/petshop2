@@ -59,17 +59,17 @@
 
 .bieudo{
     float: left;
-    margin: 0 1% 4% 1%;
+    margin: 0 2% 4% 2%;
     margin-top: 0;
-    width: 25%;
+    width: 40%;
 }
 
 .left{
-    margin-left: 5%;
+    margin-left: 7%;
 }
 
 .right{
-    margin-right: 5%;
+    margin-right: 7%;
 }
 
 @keyframes shake {

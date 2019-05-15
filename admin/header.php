@@ -2,14 +2,19 @@
     <div class="logo collapse" id="hlogo"><img src="images/logo3.png" height="100%"></div>
     <div class="menubtn"><button data-toggle="collapse" data-target="#MENU, #hlogo" onClick="changewidth()"><i class="fas fa-bars"></i></button></div>
     <div class="thongtindangnhap dropdown" data-toggle="dropdown">
-        <div class="avatar"><img src="images/anhdaidien/no-avatar.png" width="45px" height="45px"></div>
+        <div class="avatar"><i class='fas fa-user-tie'></i></div>
         <div class="tennv">
             Xin chào,<br>
-            <strong>Đỗ Tường Đại </strong><i class="fas fa-angle-down"></i>
+            <strong><?php echo $_SESSION['managerusername'] ?> </strong><i class="fas fa-angle-down"></i>
         </div>
         <div class="dropdown-menu">
-            <a href="thongtincanhan.php" class="dropdown-item" onClick="ttcn()"><i class="fa fa-id-card"></i> Thông tin cá nhân</a>
-            <a href="/petshop/admin" class="dropdown-item" onClick="signout()"><i class="fas fa-power-off"></i> Đăng xuất</a>
+            <a href="thongtincanhan.php" class="dropdown-item" onClick="ttcn()" style="font-weight: bold"><i class="fa fa-id-card"></i> Thông tin cá nhân</a>
+            <a href="/petshop/admin" style="cursor: pointer" class="dropdown-item" onClick="signout()">
+                <form method="post" action="xulytaikhoan.php" style="color: white; font-weight: bold" id="dangxuat" name="dangxuat">
+                    <input type="hidden" name="btnlogout" value="btnlogout">
+                    <i class="fas fa-power-off"></i><input type="submit" value="Đăng xuất" style="background-color: transparent; border: none; color: white; font-weight: bold">
+                </form>
+            </a>
         </div>
     </div>
 </div>
@@ -31,6 +36,6 @@
     }
     
     function signout(){
-        location.href = 'index.php';
+        document.getElementById('dangxuat').submit();
     }
 </script>
