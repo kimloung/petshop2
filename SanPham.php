@@ -11,6 +11,7 @@
             echo "<h1 style='text-align: center;color: red'>KHÔNG CÓ THÔNG TIN SẢN PHẨM</h1>";
         else
         {
+            echo "<form class='form_sp'>";
             echo "<div class='hinhanh'>";
             echo "  <img src='images/sanpham/". $row["hinhanh"] ."'>";
             echo "</div>";
@@ -26,13 +27,18 @@
                 echo "  <p class='gia'>". number_format($row["giakhuyenmai"], 0, ',', '.') ."đ</p>";
             }
             if($row["soluong"] == 0){
-                echo "  <p><button class='shop-item-button hethang'>Tạm hết hàng</button></p>";
+                echo "  <p><button class='shop-item-button hethang' disabled>Tạm hết hàng</button></p>";
             }
             else{
-                echo "  <p><button class='shop-item-button' value='". $row["masp"] ."' onClick='saveProduct(this.value)'>Đặt mua ngay</button></p>";
+                echo "<p><input name='masp' type='hidden' value='". $row["masp"] ."'>";
+                echo "<input name='soluong' type='hidden' value='1'>";
+                echo "<button type='submit' class='shop-item-button'>";
+                echo        "Đặt mua ngay";
+                echo "</button></p>";
             }
             echo "  <div class='thongtin'>". nl2br($row["mota"]) ."</div>";
             echo "</div>";
+            echo "</form>";
             echo "<div class='clear'></div>";
         }
     ?>

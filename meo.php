@@ -37,7 +37,7 @@
                     $titleprice = " | Giá đến " . $format_giaden . " đ";
                 }
                 if ($giatu != "" && $giaden != "") {
-                    $titleprice = " | Giá từ " . $format_giatu . 'đ &rarr; ' . $format_giaden . "đ";
+                    $titleprice = " | Giá từ " . $format_giatu . 'đ <i class="fas fa-arrow-right"></i> ' . $format_giaden . "đ";
                 }
                 echo $titleprice . "</span>";
             }
@@ -72,10 +72,12 @@
 
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
+                $dem=0;
                 while ($row = mysqli_fetch_array($result))
                 {
+                    echo "<form class='form_sp'>";
                     echo "<div class='sanpham'>";
-                    echo "  <a href='index.php?site=SanPham&masp=".$row["masp"]."' class='p-img'><img src='images/sanpham/". $row["hinhanh"] ."'/></a>";
+                    echo "  <a href='index.php?site=SanPham&masp=".$row["masp"]."' class='p-img'><img src='images/sanpham/". $row["hinhanh"] ."'  onerror=\"this.src='../images/sanpham/No_image_available.png'\" /></a>";
                     echo "  <a href='index.php?site=SanPham&masp=".$row["masp"]."' class='p-name'>". $row["tensp"] ."</a>";
                     if($row["giakhuyenmai"] === NULL){
                         echo "  <p class='gia'>". number_format($row["giatien"], 0, ',', '.') ."đ</p>";
@@ -88,12 +90,28 @@
                         echo "  </p>";
                     }
                     if($row["soluong"] == 0){
-                        echo "  <p><button class='shop-item-button hethang'>Tạm hết hàng</button></p>";
+                        echo "  <p><button class='shop-item-button hethang' disabled>Tạm hết hàng</button></p>";
                     }
                     else{
-                        echo "  <p><button class='shop-item-button' value='". $row["masp"] ."' onClick='saveProduct(this.value)'>Đặt mua ngay</button></p>";
+                        echo "<p><input name='masp' type='hidden' value='". $row["masp"] ."'>";
+                        echo "<input name='soluong' type='hidden' value='1'>";
+                        echo "<button type='submit' class='shop-item-button'>";
+                        echo        "Đặt mua ngay";
+                        echo "</button></p>";
                     }
                     echo "</div>";
+                    echo "</form>";
+                    $dem=$dem+1;
+                }
+                if ($dem == 0) {
+                    echo "<center>";
+                    echo "     <img src='images/background/nofound.png'>";
+                    echo "     <span>";
+                    echo "         <br><strong>Ôi không!</strong><br>";
+                    echo "         Có vẻ như chú chó này đã lấy mất tất cả sản phẩm bạn mà tìm kiếm.<br>";
+                    echo "         Trừ khi bạn đang tìm kiếm chú chó đáng yêu này. Chúc mừng! Bạn đã tìm thấy nó.<br>";
+                    echo "     </span>";
+                    echo "</center>";
                 }
             ?>
          </div>

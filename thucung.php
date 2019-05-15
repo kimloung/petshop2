@@ -46,40 +46,60 @@
     <div class="container">
         <div id="sp">
             <?php
-                $sql = "SELECT sp.*, GROUP_CONCAT(sdt.madv) AS madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp";
+                $sql = "SELECT sp.*, sdt.madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp";
                 if (isset($_GET['menu']))
                 {
+                    if($_GET['menu'] == 0)
+                        $sql = $sql;
                     if($_GET['menu'] == 1)
-                        $sql = $sql . " WHERE sdt.matl='food'";
+                        $sql = $sql . " where matl='food'";
                     if($_GET['menu'] == 2)
-                        $sql = $sql . " WHERE sdt.matl='stuff'";
+                        $sql = $sql . " where matl='stuff'";
                     if($_GET['menu'] == 3)
-                        $sql = $sql . " WHERE sdt.matl='bed'";
+                        $sql = $sql . " where matl='bed'";
                 }
 
                 if (isset($_GET['pricefrom']) && isset($_GET['priceto'])) {
                     $giatu = $_GET['pricefrom'];
                     $giaden = $_GET['priceto'];
-                    if($giatu != "" || $giaden != ""){
-                        if (strpos($sql,"WHERE") === false)
-                            $sql = $sql . " WHERE";
-                        else
-                            $sql = $sql . " AND";
+
+                    if($_GET['menu'] == 0 && $_GET['pricefrom'] != "" && $_GET['priceto'] != "") {
+                        $sql = $sql . " where";
                         if ($giatu != "" && $giaden == "")
                             $sql = $sql . " sp.giatien >= " . $giatu;
                         if ($giaden != "" && $giatu == "")
                             $sql = $sql . " sp.giatien <= " . $giaden;
                         if ($giatu != "" && $giaden != "")
-                            $sql = $sql . " (sp.giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
+                            $sql = $sql . " sp.giatien BETWEEN " . $giatu . " AND " . $giaden;
+                    }
+                    if($_GET['menu'] == 0 && $_GET['pricefrom'] == "" || $_GET['priceto'] == "") {
+                        $sql = $sql . " where";
+                        if ($giatu != "" && $giaden == "")
+                            $sql = $sql . " sp.giatien >= " . $giatu;
+                        if ($giaden != "" && $giatu == "")
+                            $sql = $sql . " sp.giatien <= " . $giaden;
+                        if ($giatu != "" && $giaden != "")
+                            $sql = $sql . " sp.giatien BETWEEN " . $giatu . " AND " . $giaden;
+                    }
+                    if($_GET['menu'] != 0) {
+                        if ($giatu != "" && $giaden == "")
+                            $sql = $sql . " AND sp.giatien >= " . $giatu;
+                        if ($giaden != "" && $giatu == "")
+                            $sql = $sql . " AND sp.giatien <= " . $giaden;
+                        if ($giatu != "" && $giaden != "")
+                            $sql = $sql . " AND (sp.giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
                     }
                 }
-                $sql = $sql . " GROUP BY sp.masp";
+
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
+                $dem=0;
+
                 while ($row = mysqli_fetch_array($result))
                 {
+                    echo "<form class='form_sp'>";
                     echo "<div class='sanpham'>";
-                    echo "  <a href='index.php?site=SanPham&masp=".$row["masp"]."' class='p-img'><img src='images/sanpham/". $row["hinhanh"] ."'/></a>";
+                    echo "  <a href='index.php?site=SanPham&masp=".$row["masp"]."' class='p-img'><img src='images/sanpham/". $row["hinhanh"] ."'  onerror=\"this.src='../images/sanpham/No_image_available.png'\" /></a>";
                     echo "  <a href='index.php?site=SanPham&masp=".$row["masp"]."' class='p-name'>". $row["tensp"] ."</a>";
                     if($row["giakhuyenmai"] === NULL){
                         echo "  <p class='gia'>". number_format($row["giatien"], 0, ',', '.') ."đ</p>";
@@ -92,13 +112,31 @@
                         echo "  </p>";
                     }
                     if($row["soluong"] == 0){
-                        echo "  <p><button class='shop-item-button hethang'>Tạm hết hàng</button></p>";
+                        echo "  <p><button class='shop-item-button hethang' disabled>Tạm hết hàng</button></p>";
                     }
                     else{
-                        echo "  <p><button class='shop-item-button' value='". $row["masp"] ."' onClick='saveProduct(this.value)'>Đặt mua ngay</button></p>";
+                        echo "<p><input name='masp' type='hidden' value='". $row["masp"] ."'>";
+                        echo "<input name='soluong' type='hidden' value='1'>";
+                        echo "<button type='submit' class='shop-item-button'>";
+                        echo        "Đặt mua ngay";
+                        echo "</button></p>";
                     }
                     echo "</div>";
+                    echo "</form>";
+                    $dem=$dem+1;
                 }
+
+                if ($dem == 0) {
+                    echo "<center>";
+                    echo "     <img src='images/background/nofound.png'>";
+                    echo "     <span>";
+                    echo "         <br><strong>Ôi không!</strong><br>";
+                    echo "         Có vẻ như chú chó này đã lấy mất tất cả sản phẩm bạn mà tìm kiếm.<br>";
+                    echo "         Trừ khi bạn đang tìm kiếm chú chó đáng yêu này. Chúc mừng! Bạn đã tìm thấy nó.<br>";
+                    echo "     </span>";
+                    echo "</center>";
+                }
+
             ?>
         </div>
         <div class="clear"></div>

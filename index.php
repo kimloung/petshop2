@@ -1,4 +1,8 @@
-﻿<!doctype html>
+﻿<?php
+    session_start();
+?>
+
+<!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -20,11 +24,13 @@
     <link href="css/SlideShow.css" rel="stylesheet" type="text/css">
     <link href="css/SanPham.css" rel="stylesheet" type="text/css">
     <link href="css/SiteDangKi.css" rel="stylesheet" type="text/css">
+    <link href="css/view_cart.css" rel="stylesheet" type="text/css">
+    <link href="css/thongtin.css" rel="stylesheet" type="text/css">
+    <link href="css/donhang.css" rel="stylesheet" type="text/css">
 
-    <script src="js/SlideShow(Auto).js"></script>
     <script src="js/Scroll_on_Top.js"></script>
-    <script src="js/User.js"></script>
     <script src="js/SP.js"></script>
+    <script src="js/cart.js"></script>
 
     <title>
         <?php
@@ -105,7 +111,7 @@ html, body {
 </style>
 </head>
 
-<body onLoad="Check_Tai_Khoan()">
+<body>
 
 <?php
     include('ScrollOnTop.php');
@@ -137,7 +143,7 @@ html, body {
     
 <?php
     if(isset($_GET['site']) && $_GET['site'] == "GioHang")
-            include("GioHang.php");
+            include("view_cart.php");
 ?>
 
 <div class="Main">
@@ -156,6 +162,7 @@ html, body {
                     case 'chim': 
                     case 'ca': 
                     case 'hamster': 
+                    case 'timkiem':
                         include("timkiemnangcao.php");
                         break;
                     }

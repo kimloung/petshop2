@@ -200,6 +200,16 @@
     width: 150px;
 }
 
+#advsearch .luachon:focus {
+    background-image: linear-gradient(to left, #DD4920, #e63188);
+    background-color: 0.5;
+    color: whitesmoke;
+}
+
+#advsearch .luachon:focus>option {
+    color: black;
+}
+
 
 /*For small screen*/
 
@@ -215,25 +225,6 @@
     }
     .Main .sanpham .p-name {
         font-size: 18px;
-    }
-    
-    .Main .advsearch {
-        margin-top: -17.5%;
-        margin-right: -25%;
-    }
-    
-    #advsearch .row:first-child{
-        width: 30%;
-        float: left;
-    }
-    
-    #advsearch .row:last-child{
-        width: 70%;
-        float: right;
-    }
-    
-    #advsearch .luachon{
-        width: 100px;
     }
 }
 

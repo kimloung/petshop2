@@ -1,21 +1,21 @@
 <?php
-    $sql   = "SELECT COUNT(*) AS numproducts FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp";
+    $sql   = "SELECT COUNT(*) AS numproducts FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp WHERE xoa=0";
     if(isset($_GET['site']))
     {
         $site = $_GET['site'];
         
         if($site == "thucung")
-            $sql = "SELECT COUNT(*) AS numproducts FROM (SELECT sp.*, GROUP_CONCAT(sdt.madv) AS madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp GROUP BY masp) AS t";
+            $sql = "SELECT COUNT(*) AS numproducts FROM (SELECT sp.*, GROUP_CONCAT(sdt.madv) AS madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE xoa=0 GROUP BY masp) AS t";
         if($site == "cho")
-            $sql = $sql . " WHERE madv='dog'";
+            $sql = $sql . " AND madv='dog'";
         if($site == "meo")
-            $sql = $sql . " WHERE madv='cat'";
+            $sql = $sql . " AND madv='cat'";
         if($site == "chim")
-            $sql = $sql . " WHERE madv='bird'";
+            $sql = $sql . " AND madv='bird'";
         if($site == "ca")
-            $sql = $sql . " WHERE madv='fish'";
+            $sql = $sql . " AND madv='fish'";
         if($site == "hamster")
-            $sql = $sql . " WHERE madv='hamster'";
+            $sql = $sql . " AND madv='hamster'";
     }
     if (isset($_GET['menu']))
     {
@@ -47,11 +47,10 @@
                 $sql = $sql . " (giatien BETWEEN " . $giatu . " AND " . $giaden . ")";
         }
     }
-
     if(isset($_GET['key'])) //Phần tìm kiếm
     {
         $key = $_GET['key'];
-        $sql = "SELECT COUNT(*) AS numproducts FROM (SELECT sp.*, GROUP_CONCAT(sdt.madv) AS madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE BINARY UPPER(sp.masp) LIKE UPPER('%".$key."%') OR BINARY UPPER(sp.tensp) LIKE UPPER('%".$key."%') OR BINARY UPPER(sp.mota) LIKE UPPER('%".$key."%') GROUP BY sp.masp) AS c";
+        $sql = "SELECT COUNT(*) AS numproducts FROM (SELECT sp.*, GROUP_CONCAT(sdt.madv) AS madv, sdt.matl, km.giakhuyenmai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp LEFT JOIN spkhuyenmai AS km ON sp.masp = km.masp WHERE xoa=0 AND BINARY UPPER(sp.masp) LIKE UPPER('%".$key."%') OR BINARY UPPER(sp.tensp) LIKE UPPER('%".$key."%') OR BINARY UPPER(sp.mota) LIKE UPPER('%".$key."%') GROUP BY sp.masp) AS c";
         if(isset($_GET['thucung']) || isset($_GET['theloai']) || isset($_GET['giatu']) || isset($_GET['giaden'])){
             $where = " WHERE ";
             $testwhere=1;
@@ -132,15 +131,14 @@
                 $nav .= "<a href='".$link."&page=".$page."'><div class='so'>".$page."</div></a>";
        }
     }
-
     // tao lien ket den trang truoc & trang sau, trang dau, trang cuoi
-    if ($pageNum > 1 && $pageNum < 5)
+    if ($pageNum > 1 && $pageNum <= 5)
     {
         $page  = $pageNum - 1;
         $prev  = "<a title='Trang trước' href='".$link."&page=".$page."'><div class='so'>&lsaquo;</div></a>";
         $first = "";
     }
-    else if ($pageNum > 1 && $pageNum >= 5)
+    else if ($pageNum > 1 && $pageNum > 5)
     {
         $page  = $pageNum - 1;
         $prev  = "<a title='Trang trước' href='".$link."&page=".$page."'><div class='so'>&lsaquo;</div></a>";
@@ -151,7 +149,6 @@
        $prev  = ""; // dang o trang 1, khong can in lien ket trang truoc
        $first = ""; // va lien ket trang dau
     }
-
     if ($pageNum < $maxPage && $maxPage-$pageNum <= 3)
     {
         $page = $pageNum + 1;
@@ -169,7 +166,11 @@
        $next = ""; // dang o trang cuoi, khong can in lien ket trang ke
        $last = ""; // va lien ket trang cuoi
     }
-
+    if($maxPage < 8)
+    {
+        $first = "";
+        $last = "";
+    }
     if($numproducts > $productsPerPage){
         echo "<div class='sotrang'>";
         echo $prev . $first . $nav . $last . $next;

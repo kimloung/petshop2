@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm sticky-top justify-content-center">
+<nav class="navbar navbar-expand-sm <?php if(isset($_GET['site'])){ if($_GET['site']!="GioHang"){ echo 'sticky-top';}} ?> justify-content-center">
     <ul class="nav nav-pills">
         <li class="nav-item">
             <a href="/petshop" class="nav-link">Trang chủ</a>

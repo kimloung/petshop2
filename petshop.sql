@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3307
--- Thời gian đã tạo: Th4 22, 2019 lúc 05:49 AM
+-- Thời gian đã tạo: Th5 14, 2019 lúc 05:03 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -21,6 +21,20 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `petshop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `chitiethoadon`
+--
+
+CREATE TABLE `chitiethoadon` (
+  `mahd` int(11) NOT NULL COMMENT 'mã hóa đơn',
+  `masp` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'mã sản phẩm',
+  `giatien` double NOT NULL COMMENT 'đơn giá',
+  `soluong` int(11) NOT NULL COMMENT 'số lượng',
+  `thanhtien` double NOT NULL COMMENT 'thành tiền'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -43,6 +57,20 @@ INSERT INTO `dongvat` (`madv`, `tendv`) VALUES
 ('dog', 'chó'),
 ('fish', 'cá'),
 ('hamster', 'hamster');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `hoadon`
+--
+
+CREATE TABLE `hoadon` (
+  `mahd` int(11) NOT NULL,
+  `tendangnhap` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'tài khoản',
+  `ngaydathang` date NOT NULL COMMENT 'ngày đặt hàng',
+  `tongtien` double NOT NULL COMMENT 'tổng tiền',
+  `trangthai` varchar(30) COLLATE utf8_unicode_ci NOT NULL COMMENT 'trạng thái'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -393,6 +421,23 @@ INSERT INTO `sp_dv_tl` (`masp`, `madv`, `matl`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `taikhoan`
+--
+
+CREATE TABLE `taikhoan` (
+  `tendangnhap` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'tên đăng nhập',
+  `matkhau` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'mật khẩu',
+  `mavt` varchar(10) COLLATE utf8_unicode_ci DEFAULT 'customer' COMMENT 'mã vai trò',
+  `hoten` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'họ và tên',
+  `ngaysinh` date DEFAULT NULL COMMENT 'ngày sinh',
+  `dienthoai` int(11) NOT NULL COMMENT 'số điện thoại',
+  `email` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'email',
+  `khoa` int(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Cấu trúc bảng cho bảng `theloai`
 --
 
@@ -410,15 +455,50 @@ INSERT INTO `theloai` (`matl`, `theloai`) VALUES
 ('food', 'thức ăn'),
 ('stuff', 'vật dụng');
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `vaitro`
+--
+
+CREATE TABLE `vaitro` (
+  `mavt` varchar(10) COLLATE utf8_unicode_ci NOT NULL COMMENT 'mã vai trò',
+  `vaitro` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'vai trò',
+  `quyen` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'đặc quyền'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `vaitro`
+--
+
+INSERT INTO `vaitro` (`mavt`, `vaitro`, `quyen`) VALUES
+('admin', 'quản trị viên', 'quản lý tài khoản'),
+('customer', 'khách hàng', 'chỉ được mua'),
+('sale', 'bán hàng', 'quản lý bán hàng');
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
+
+--
+-- Chỉ mục cho bảng `chitiethoadon`
+--
+ALTER TABLE `chitiethoadon`
+  ADD KEY `mahd` (`mahd`),
+  ADD KEY `masp` (`masp`);
 
 --
 -- Chỉ mục cho bảng `dongvat`
 --
 ALTER TABLE `dongvat`
   ADD PRIMARY KEY (`madv`);
+
+--
+-- Chỉ mục cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD PRIMARY KEY (`mahd`),
+  ADD KEY `tendangnhap` (`tendangnhap`);
 
 --
 -- Chỉ mục cho bảng `sanpham`
@@ -447,14 +527,50 @@ ALTER TABLE `sp_dv_tl`
   ADD KEY `matl` (`matl`);
 
 --
+-- Chỉ mục cho bảng `taikhoan`
+--
+ALTER TABLE `taikhoan`
+  ADD PRIMARY KEY (`tendangnhap`),
+  ADD KEY `mavt` (`mavt`);
+
+--
 -- Chỉ mục cho bảng `theloai`
 --
 ALTER TABLE `theloai`
   ADD PRIMARY KEY (`matl`);
 
 --
+-- Chỉ mục cho bảng `vaitro`
+--
+ALTER TABLE `vaitro`
+  ADD PRIMARY KEY (`mavt`);
+
+--
+-- AUTO_INCREMENT cho các bảng đã đổ
+--
+
+--
+-- AUTO_INCREMENT cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Các ràng buộc cho các bảng đã đổ
 --
+
+--
+-- Các ràng buộc cho bảng `chitiethoadon`
+--
+ALTER TABLE `chitiethoadon`
+  ADD CONSTRAINT `chitiethoadon_ibfk_1` FOREIGN KEY (`mahd`) REFERENCES `hoadon` (`mahd`),
+  ADD CONSTRAINT `chitiethoadon_ibfk_2` FOREIGN KEY (`masp`) REFERENCES `sanpham` (`masp`);
+
+--
+-- Các ràng buộc cho bảng `hoadon`
+--
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `hoadon_ibfk_3` FOREIGN KEY (`tendangnhap`) REFERENCES `taikhoan` (`tendangnhap`);
 
 --
 -- Các ràng buộc cho bảng `spkhuyenmai`
@@ -475,6 +591,12 @@ ALTER TABLE `sp_dv_tl`
   ADD CONSTRAINT `sp_dv_tl_ibfk_1` FOREIGN KEY (`masp`) REFERENCES `sanpham` (`masp`),
   ADD CONSTRAINT `sp_dv_tl_ibfk_2` FOREIGN KEY (`madv`) REFERENCES `dongvat` (`madv`),
   ADD CONSTRAINT `sp_dv_tl_ibfk_3` FOREIGN KEY (`matl`) REFERENCES `theloai` (`matl`);
+
+--
+-- Các ràng buộc cho bảng `taikhoan`
+--
+ALTER TABLE `taikhoan`
+  ADD CONSTRAINT `taikhoan_ibfk_1` FOREIGN KEY (`mavt`) REFERENCES `vaitro` (`mavt`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

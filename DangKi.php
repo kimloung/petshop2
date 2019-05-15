@@ -1,6 +1,6 @@
 ﻿<div class="Middle">
 	
-    <form method="post" onsubmit="return kiemtra()" action="index.php" class="DangKi">
+    <form method="post" onsubmit="return kiemtra()" action="xulytaikhoan.php" class="DangKi">
        		 
         <div class="dangkynguoidung">
             <a><img src="images/dangky/a15ec2a159ad63ec717d1523f3b1db4d.jpg"></a>
@@ -10,15 +10,15 @@
         <div class="thongtincanhan">
             <div class="thongtin">
                 <h3>Tên đăng nhập*</h3>
-                <div><input class="test" type="text" name="" id="UserName" size="70" placeholder="Tên đăng nhập không được có dấu và khoảng cách!!!!"></div>
+                <div><input class="test" type="text" name="username" id="UserName" size="70" placeholder="Tên đăng nhập không được có dấu và khoảng cách!!!!"></div>
             </div>
             <div class="thongtin">
                  <h3>Mật khẩu*</h3>
-                 <div style="width:500px;margin:auto"><input type="password" name="" id="MatKhau" placeholder="Tối thiểu 5 kí tự" ></div>
+                 <div style="width:500px;margin:auto"><input type="password" name="password" id="MatKhau" placeholder="Tối thiểu 5 kí tự" ></div>
             </div>
             <div class="thongtin">
                  <h3>Nhập lại mật khẩu*</h3>
-                 <div style="width:500px;margin:auto"><input type="password" name="Name" id="Re-MatKhau" placeholder="**************" ></div>		
+                 <div style="width:500px;margin:auto"><input type="password" name="re_password" id="Re-MatKhau" placeholder="**************" ></div>		
             </div>
             <div class="thongtin">
             	<h3>Email</h3>
@@ -26,14 +26,14 @@
             </div>
             <div class="thongtin">
                 <h3>Họ và tên*</h3>
-                <input type="text" name="Name" id="Name" class="test" placeholder=""/>
+                <input type="text" name="name" id="Name" class="test" placeholder=""/>
             </div>
             <div class="thongtin">
                 <h3>Ngày tháng năm sinh</h3>
                 <div class="item-dk" style="padding-top:16px;">
                     <!--ngay sinh-->
                     <div class="item-ns">
-                        <input type="date" />
+                        <input type="date" name="ngaysinh" id="ngaysinh" />
                     </div>
                 </div>
             </div>
@@ -41,20 +41,12 @@
                 <h3>Số điện thoại*</h3>
                 <input type="text" name="phone" id="phone" class="test" placeholder=" ">
             </div>
-            <div class="thongtin">
-                <h3 style="margin-bottom:8px">Giới tính</h3>
-                <div style="font-size:18px">
-                    <span style="padding-right:35px"><label><input name="sex" id="malesex" type="radio" value="Nam"/>Nam</label></span>
-                    <span><label><input name="sex" id="femalesex" type="radio" value="Nu"/>Nữ</label></span>
-                </div>
-            </div>
-            
             <div class="thongtin"><label>
                 <input type="checkbox" name="agree" id="agree">
                 <span>Tôi đã đọc và đồng ý với <a href="index.php?site=dieukhoansudung" class="dongy">Điều khoản sử dụng</a> của PetShop*</span>
             </label></div>
             <div class="Nut_Submit_Delete">
-                <span style="padding-right:35px"><input type="submit" value="Đăng ký"/></span>
+                <span style="padding-right:35px"><input type="submit" name="submit" value="Đăng ký"/></span>
                 <span><input type="reset" value="Nhập lại" onclick="document.getElementById('UserName').focus();"/></span>
             </div>
         </div>
@@ -145,7 +137,7 @@
 		}
 		if(flag4 == false)
 		{
-			window.alert("Số điện thoại không hợp lệ, vui lòng nhâọ lại");
+			window.alert("Số điện thoại không hợp lệ, vui lòng nhập lại");
 			phone.focus();
 			return false;
 		}
@@ -162,6 +154,6 @@
 			agree.focus();
 			return false;
 		}
-		return User();
+		return true;
 	}
 </script>
