@@ -1,4 +1,4 @@
-<div>
+﻿<div>
     <h1 class="title-background">
         <span class="title">Tìm kiếm nâng cao</span>
     </h1>
@@ -56,12 +56,12 @@
     </div>
     <script>
         function KTTK() {
-            var $pricefrom = document.getElementById('pricefrom').value;
-            var $priceto = document.getElementById('priceto').value;
+            var $pricefrom = document.getElementById('giatu').value;
+            var $priceto = document.getElementById('giaden').value;
             if($pricefrom != "" && $priceto != "" && parseInt($pricefrom) > parseInt($priceto))
             {
-                document.getElementById('pricefrom').value = $priceto;
-                document.getElementById('priceto').value = $pricefrom;
+                document.getElementById('giatu').value = $priceto;
+                document.getElementById('giaden').value = $pricefrom;
             }
         }
     </script>

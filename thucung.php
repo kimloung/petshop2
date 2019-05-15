@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     require 'DataProvider.php';
     require 'ProductsPerPage.inc';
 ?>
@@ -142,6 +142,7 @@
         <div class="clear"></div>
         
         <?php
+	if($dem != 0)
             include('pagination.php');
         ?>
         

@@ -48,6 +48,15 @@ table tbody td {
 	border-bottom: 2px solid #f5f5f5;
 }
 
+th a{
+    color: white;
+}
+
+th a:hover{
+    color: white;
+    text-decoration: none;
+}
+
 .xoa_user,.sua_user{
 	height: 33px;
 	width: 65px;

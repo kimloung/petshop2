@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     require 'DataProvider.php';
 ?>
 
@@ -22,7 +22,6 @@
         <form name="form1" id="thongtin1" method="post">
             <div class="title">
                 <h3>Thông tin cơ bản</h3>
-                <a href="" class="edit" onClick="edit('thongtin1'); return false;">Sửa</a>
                 <input type="submit" value="Lưu">
                 <input type="reset" value="Hủy" onClick="cancel('thongtin1')">
                 <div class="clear"></div>
@@ -48,7 +47,6 @@
         <form name="form2" id="thongtin2" method="post">
             <div class="title">
                 <h3>Thông tin liên lạc</h3>
-                <a href="" class="edit" onClick="edit('thongtin2'); return false;">Sửa</a>
                 <input type="submit" value="Lưu">
                 <input type="reset" value="Hủy" onClick="cancel('thongtin2')">
                 <div class="clear"></div>

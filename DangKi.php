@@ -21,7 +21,7 @@
                  <div style="width:500px;margin:auto"><input type="password" name="re_password" id="Re-MatKhau" placeholder="**************" ></div>		
             </div>
             <div class="thongtin">
-            	<h3>Email</h3>
+            	<h3>Email*</h3>
                 <input type="email" name="email" id="email" class="test" />
             </div>
             <div class="thongtin">

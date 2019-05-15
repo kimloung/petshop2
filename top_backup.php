@@ -23,7 +23,7 @@
         }
         ?>
         <div id="Phan_dang_nhap" class="Khung_dang_nhap">
-            <form id="form_dangnhap" class="Noi_dung_khung Hoat_canh">
+            <form class="Noi_dung_khung Hoat_canh" method="POST" action="xulytaikhoan.php">
                 <div class="Cach_khung">
                     <span class="close" onClick="tatdangnhap()">&times;</span>
                     <img src="images/logo/logo.png" height="75px">
@@ -100,7 +100,7 @@
 				</table>
 			</div>
 			<script>
-				if(<?php isset($_SESSION['username'])?>)
+				if(<?php isset($_SESSION['username']) ?>)
 				{
 					document.getElementById('Ten-NguoiDung').innerHTML = '<td>'+ <?php $_SESSION['hoten'] ?>+'</td>';
 					document.getElementById('Birth-NguoiDung').innerHTML = '<td>'+ <?php $_SESSION['ngaysinh'] ?>+'</td>';

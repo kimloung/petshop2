@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     include 'accesssale.php';
     require '../DataProvider.php';
     require '../ProductsPerPage.inc';
@@ -130,6 +130,8 @@ html, body {
                 {
                     $sql = $sql . " WHERE sp.masp ='" .$_GET['masp']. "'";
                 }
+                if(isset($_GET['sapxep']))
+                    $sql = $sql . " ORDER BY " . $_GET['sapxep'];
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
                 while ($row = mysqli_fetch_array($result))

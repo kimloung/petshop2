@@ -1,24 +1,4 @@
 ﻿$(document).ready(function() {
-    $("#form_dangnhap").submit(function(e) {
-	var form_data = $(this).serialize();
-
-        $.ajax({
-            url: "xulytaikhoan.php",
-            method: "POST",
-            data: form_data,
-            success: function(result) {
-                if (result == "1") {
-                    alert('Đăng nhập thành công');
-                    window.location = 'index.php';
-                } else {
-                    alert('Tài khoản hoặc mật khẩu không đúng, vui lòng kiểm tra lại !!');
-                }
-		alert(result);
-            }
-        });
-        e.preventDefault();
-    });
-
     $(".form_purchase").submit(function(e) {
         var form_data = $(this).serialize();
         $.ajax({
@@ -26,8 +6,8 @@
             method: "POST",
             data: form_data,
             success: function(data) {
-                    alert('Cảm ơn bạn đã tin tưởng và mua hàng của PetShop');
-                    window.location = 'index.php';
+                alert('Cảm ơn bạn đã tin tưởng và mua hàng của PetShop');
+                window.location = 'index.php';
             }
         });
         e.preventDefault();
@@ -44,11 +24,9 @@
             dataType: "json",
             data: form_data,
             success: function(data) {
-                alert("Thêm vào giỏ hàng thành công");
-                btn_content.html('Đặt mua ngay');
-                /*btn_content.html('Đã thêm');
+                btn_content.html('Đã thêm');
                 btn_content.addClass(" hethang");
-                btn_content.prop("disabled", true);*/
+                btn_content.prop("disabled", true);
             }
         });
         e.preventDefault();
@@ -59,7 +37,7 @@
         var element = this;
         setTimeout(function() {
             update_quantity.call(element);
-        }, 1500);
+        }, 100);
     });
 
     function update_quantity() {

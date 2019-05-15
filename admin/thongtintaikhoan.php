@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     include 'accessadmin.php';
     require '../DataProvider.php';
     require '../ProductsPerPage.inc';
@@ -144,10 +144,6 @@ html, body {
                     echo "  <td>0" .$row["dienthoai"]. "</td>";
                     echo "  <td>" .$row["email"]. "</td>";
                     echo "  <td>";
-                    echo "      <form method='post' onSubmit='return xoa_tk()' action=''>";
-                    echo "          <input type='hidden' name='del_id' value='" . $row["tendangnhap"] . "'>";
-                    echo "          <input type='submit' value='Xóa' class='xoa_user'>";
-                    echo "      </form>";
                     echo "      <form method='post' onSubmit='return khoa_tk()' action=''>";
                     echo "          <input type='hidden' name='lock_id' value='" . $row["tendangnhap"] . "'>";
                     echo "          <input type='submit' value='Khóa' class='xoa_user'>";

@@ -4,7 +4,7 @@
 	session_start();
 	// Xử lý đăng ký
 	if(isset($_POST['submit'])){
-
+		
 		// Lấy dữ liệu từ user
 		$username = addslashes($_POST["username"]);
 		$password = addslashes($_POST["password"]);
@@ -44,36 +44,40 @@
 	}
 	
 	// xử lý đăng nhập
-	if(isset($_POST["btnlogin"])){
+	if(isset($_POST["taikhoan"]) && isset($_POST["matkhau"])){ 
 		$username = addslashes($_POST["taikhoan"]);
 		$password = addslashes($_POST["matkhau"]);
 		
-		$password=md5($password);
+		$password = md5($password);
 		
 		// KT tai khoan ton tai chua
-		$qry="SELECT * FROM taikhoan WHERE tendangnhap='$username'";
+		$qry="SELECT * FROM taikhoan WHERE tendangnhap='$username' AND matkhau='$password'";
 		$rs=DataProvider::executeQuery($qry);
 		$row=mysqli_num_rows($rs);
 		$thanhvien=mysqli_fetch_array($rs);
+
 		// status la tinh trang cua account do, status = 0 thi dc dang nhap
-		$status=$thanhvien["khoa"];		
+		$status=$thanhvien["khoa"];	
 		//echo "<script language='javascript'> alert($thanhvien['hoten']);</script>";
-		if(($row == 0) || ($status != 0))
+		if(($row == 0) || ($status != 0) || ($password != $thanhvien['matkhau']))
 		{
-			echo "<script language='javascript'> alert('Tài khoản hoặc mật khẩu không đúng, vui lòng kiểm tra lại !!');history.go(-1); </script>";
+			//echo "<script language='javascript'> alert('Tài khoản hoặc mật khẩu không đúng, vui lòng kiểm tra lại !!');history.go(-1); </script>";
+			echo 0;
+			exit();
 		}
 		// so sanh mat khau co trung ko 
 		else
 		{
 			$_SESSION['username'] = $thanhvien['tendangnhap'];
-			$_SESSION['password'] = $thanhvien['matkhau'];
 			$_SESSION['name']     = $thanhvien['hoten'];
 			$_SESSION['email']    = $thanhvien['email'];
-            		$_SESSION['ngaysinh'] = $thanhvien['ngaysinh'];
+            $_SESSION['ngaysinh'] = $thanhvien['ngaysinh'];
 			$_SESSION['sdt']      = $thanhvien['dienthoai'];
 			$_SESSION['status']   = $thanhvien['khoa'];
 			$_SESSION['IsLogin']  = 1;
-			echo "<script language='javascript'> alert('Đăng nhập thành công');window.location='index.php';</script>";
+			//echo "<script language='javascript'> alert('Đăng nhập thành công');window.location='index.php';</script>";
+			echo 1;
+			exit();
 		}
 	}
 	//xử lý đăng xuất

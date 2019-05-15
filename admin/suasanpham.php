@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     include 'accesssale.php';
     require '../DataProvider.php';
 ?>
@@ -48,7 +48,7 @@
         $sql3="SELECT * FROM spkhuyenmai WHERE masp = '" .$_GET['masp']. "'";
         $ktphanloaisp=DataProvider::executeQuery($sql3);
 
-        if(mysqli_num_rows($ktphanloaisp) >= 1)
+        if(mysqli_num_rows($ktphanloaisp) == 0)
         {
             $sql = "SELECT sp.*, GROUP_CONCAT(DISTINCT(dv.tendv)) AS tendv, GROUP_CONCAT(DISTINCT(tl.theloai)) AS theloai FROM sanpham as sp JOIN sp_dv_tl as sdt ON sp.masp = sdt.masp JOIN dongvat AS dv ON dv.madv = sdt.madv JOIN theloai AS tl ON tl.matl = sdt.matl WHERE sp.masp = '".$_GET['masp']."' GROUP BY sp.masp";
             $result = DataProvider::executeQuery($sql);
@@ -64,7 +64,7 @@
                 $theloai = $row['theloai'];
             }
         }
-        else
+        /*else
         {
             $sql = "SELECT * FROM sanpham";
             $result = DataProvider::executeQuery($sql);
@@ -79,7 +79,7 @@
                 $tendv = "";
                 $theloai = "";
             }
-        }
+        }*/
     }
 ?>
 
@@ -260,7 +260,7 @@ html, body {
         }
         inputs[0].style.display="block";
         inputs[1].style.display="block";
-        for(i=2;i<inputs.length;i++){
+        for(i=3;i<inputs.length;i++){
             inputs[i].disabled=false;
             inputs[i].readOnly=false;
         }

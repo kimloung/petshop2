@@ -1,4 +1,4 @@
-<div class="header" id="Header">
+﻿<div class="header" id="Header">
     <div class="logo collapse" id="hlogo"><img src="images/logo3.png" height="100%"></div>
     <div class="menubtn"><button data-toggle="collapse" data-target="#MENU, #hlogo" onClick="changewidth()"><i class="fas fa-bars"></i></button></div>
     <div class="thongtindangnhap dropdown" data-toggle="dropdown">
@@ -10,7 +10,7 @@
         <div class="dropdown-menu">
             <a href="thongtincanhan.php" class="dropdown-item" onClick="ttcn()" style="font-weight: bold"><i class="fa fa-id-card"></i> Thông tin cá nhân</a>
             <a href="/petshop/admin" style="cursor: pointer" class="dropdown-item" onClick="signout()">
-                <form method="post" action="xulytaikhoan.php" style="color: white; font-weight: bold" id="dangxuat" name="dangxuat">
+                <form method="post" action="xulytaikhoan.php" style="color: white; font-weight: bold; padding: 0" id="dangxuat" name="dangxuat">
                     <input type="hidden" name="btnlogout" value="btnlogout">
                     <i class="fas fa-power-off"></i><input type="submit" value="Đăng xuất" style="background-color: transparent; border: none; color: white; font-weight: bold">
                 </form>

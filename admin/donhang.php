@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     include 'accesssale.php';
     require '../DataProvider.php';
     require '../ProductsPerPage.inc';
@@ -7,7 +7,9 @@
 <?php
     if(isset($_POST['suatinhtrang']))
     {
-        $sql = "UPDATE hoadon SET trangthai='".$_POST['suatinhtrang']."' WHERE mahd = '" .$_POST['suamahd']. "'";
+	$edittinhtrang = $_POST['suatinhtrang'];
+	$editmahd = $_POST['suamahd'];
+        $sql = "UPDATE hoadon SET trangthai=N'".$edittinhtrang."' WHERE mahd = '" .$editmahd. "'";
         DataProvider::executeQuery($sql);
         echo "<script language='javascript'> ;alert('Cập nhật tình trạng hóa đơn thành công!!!');</script>";
     }
@@ -118,6 +120,8 @@ html, body {
         <tbody>
             <?php
                 $sql = "SELECT * FROM hoadon";
+                if(isset($_GET['sapxep']))
+                    $sql = $sql . " ORDER BY " . $_GET['sapxep'];
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
                 while ($row = mysqli_fetch_array($result))
@@ -126,15 +130,11 @@ html, body {
                     echo "  <td>" .$row["mahd"]. "</td>";
                     echo "  <td>" .$row["tendangnhap"]. "</td>";
                     echo "  <td>" .$row["ngaydathang"]. "</td>";
-                    echo "  <td>" .$row["tongtien"]. "</td>";
+                    echo "  <td>" .number_format($row["tongtien"], 0, ',', '.'). "đ</td>";
                     echo "  <td>" .$row["trangthai"]. "</td>";
                     echo "  <td>";
                     echo "  <button class='xem_dh' value='".$row["mahd"]."' onClick='goto(this.value)'>Chi tiết</button>";
                     echo "  <button class='sua_dh' value='".$row["mahd"]."' onClick=\"edit('".$row["mahd"]."')\">Sửa</button>";
-                    echo "  <form method='post' onSubmit='return xoa_hd()' action=''>";
-                    echo "      <input type='hidden' name='del_id' value='" . $row["mahd"] . "'>";
-                    echo "      <input type='submit' value='Xóa' class='xoa_dh'>";
-                    echo "  </form>";
                     echo "  </td>";
                     echo "<tr>";
                 }
@@ -160,16 +160,16 @@ html, body {
             <div class="popup-dh-right">
                 <div class="popup-dh-left__input">
                     <input type="hidden" name="suamahd">
-                    <input class="sua-dh" type="text" name="suamahd" id="suamahd"  readonly disabled style="background-color: transparent; border: none; color: black">
+                    <input class="sua-dh" type="text" name="suamahd" id="suamahd"  readonly style="background-color: transparent; border: none; color: black">
                 </div>
                 <div class="popup-dh-left__input">
                     <select class="sua-dh" name="suatinhtrang">
                         <option value="chưa xử lý">Chưa xử lý</option>
-                        <option value="đã xử lý">Đã xửa lý</option>
+                        <option value="đã xử lý">Đã xử lý</option>
                     </select>
                 </div>
             </div>
-            <button class="popup-dh__btn" onclick="sua_thong_tin_don_hang()">Sửa</button>
+            <button type="submit" class="popup-dh__btn">Sửa</button>
             <span class="back" onclick="close_popup_dh_sua()">&times;</span>
             </form>
         </div>

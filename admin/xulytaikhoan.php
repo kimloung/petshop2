@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	// Nếu ko phải là sự kiện xử lý đăng ký thì ko chạy
 	require '../DataProvider.php';
 	session_start();
@@ -19,7 +19,7 @@
 		$status=$thanhvien["khoa"];		
         $vaitro=$thanhvien["mavt"];
 		//echo "<script language='javascript'> alert($thanhvien['hoten']);</script>";
-		if(($row == 0) || ($status != 0) || ($vaitro == "customer"))
+		if(($row == 0) || ($status != 0) || ($password != $thanhvien['matkhau']) || ($vaitro == "customer"))
 		{
 			echo "<script language='javascript'> alert('Email hoặc mật khẩu sai!');history.go(-1); </script>";
 		}
@@ -27,7 +27,6 @@
 		else
 		{
 			$_SESSION['managerusername'] = $thanhvien['tendangnhap'];
-			$_SESSION['managerpassword'] = $thanhvien['matkhau'];
             $_SESSION['managervaitro']   = $thanhvien['mavt'];
 			$_SESSION['managername']     = $thanhvien['hoten'];
 			$_SESSION['manageremail']    = $thanhvien['email'];

@@ -4,8 +4,9 @@
     $numproducts = $product['numproducts'];
     $maxPage = ceil($numproducts/$productsPerPage);
     $link=$_SERVER['REQUEST_URI'];
-    if(isset($_GET['page']))
+    if(isset($_GET['page'])){
         $link = explode("?page=", $link)[0];
+    }
     $nav  = '';
     $LessPages = 0;
     $MorePages = 0;
@@ -45,6 +46,8 @@
     {
         $page  = $pageNum - 1;
         $prev  = "<a title='Trang trước' href='".$link."?page=".$page."'><div class='so'>&lsaquo;</div></a>";
+        if(isset($_GET['sapxep']))
+            $prev  = "<a title='Trang trước' href='".$link."&page=".$page."'><div class='so'>&lsaquo;</div></a>";
         $first = "";
     }
     else if ($pageNum > 1 && $pageNum >= 5)

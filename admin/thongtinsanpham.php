@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     include 'accesssale.php';
     require '../DataProvider.php';
     require '../ProductsPerPage.inc';
@@ -174,6 +174,8 @@ html, body {
         <tbody>
             <?php
                 $sql = "SELECT * FROM sanpham WHERE xoa=0";
+                if(isset($_GET['sapxep']))
+                    $sql = $sql . " ORDER BY " .$_GET['sapxep'];
                 $sql = $sql . " LIMIT $offset, $productsPerPage";
                 $result = DataProvider::executeQuery($sql);
                 while ($row = mysqli_fetch_array($result))
@@ -240,8 +242,8 @@ html, body {
                             <option value="bed">Giường, chuồng</option>
                         </select>
                     </div>
-                    <div class="popup-themsp-left__input"><input class="them-hinh them-mot-sp" name="hinhanh" type="file" accept=".jpeg,.jpg,.png"></div>
-                    <div class="popup-themsp-left__input"><textarea class="them-mot-sp" name="mota" cols="40" rows="5" form="themsp"></textarea></div>
+                    <div class="popup-themsp-left__input"><input class="them-hinh them-mot-sp" name="hinhanh" type="file" accept=".jpeg,.jpg,.png" style="width: 200px; overflow: hidden"></div>
+                    <div class="popup-themsp-left__input"><textarea class="them-mot-sp" name="mota" cols="30" rows="5" form="themsp"></textarea></div>
                 </div>
                 <div class="clear"></div>
                 <input type="submit" class="popup-themsp__btn" value="Thêm">

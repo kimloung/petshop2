@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3307
--- Thời gian đã tạo: Th5 15, 2019 lúc 07:53 AM
+-- Thời gian đã tạo: Th5 15, 2019 lúc 05:34 PM
 -- Phiên bản máy phục vụ: 10.1.38-MariaDB
 -- Phiên bản PHP: 7.3.3
 
@@ -41,14 +41,15 @@ CREATE TABLE `chitiethoadon` (
 --
 
 INSERT INTO `chitiethoadon` (`mahd`, `masp`, `giatien`, `soluong`, `thanhtien`) VALUES
-(2, 'SP139', 59000, 1, 59000),
-(2, 'SP50', 126000, 1, 126000),
-(2, 'SP120', 25000, 1, 25000),
-(2, 'SP136', 70000, 1, 70000),
-(2, 'SP130', 139000, 1, 139000),
-(2, 'SP123', 100000, 1, 100000),
-(3, 'SP13', 155000, 2, 310000),
-(3, 'SP140', 520000, 1, 520000);
+(4, 'SP130', 139000, 2, 278000),
+(4, 'SP11', 19000, 1, 19000),
+(6, 'SP11', 19000, 1, 19000),
+(6, 'SP1', 25000, 1, 25000),
+(6, 'SP58', 286000, 2, 572000),
+(6, 'SP127', 18000, 5, 90000),
+(7, 'SP65', 25000, 1, 25000),
+(7, 'SP66', 160000, 1, 160000),
+(7, 'SP67', 160000, 1, 160000);
 
 -- --------------------------------------------------------
 
@@ -91,8 +92,9 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`mahd`, `tendangnhap`, `ngaydathang`, `tongtien`, `trangthai`) VALUES
-(2, 'abc123', '2019-05-15', 519000, 'chưa xử lý'),
-(3, 'abc123', '2019-05-15', 830000, 'chưa xử lý');
+(4, 'dat123', '2019-05-15', 297000, 'chưa xử lý'),
+(6, 'dat123', '2019-05-15', 706000, 'đã xử lý'),
+(7, 'dat123', '2019-05-15', 345000, 'đã xử lý');
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,7 @@ CREATE TABLE `sanpham` (
 --
 
 INSERT INTO `sanpham` (`masp`, `tensp`, `hinhanh`, `soluong`, `giatien`, `mota`, `xoa`) VALUES
-('SP0', 'Royal Canin - Mini Dermacomfort', 'food4.jpg', 27, 192000, 'ĐẶC ĐIỂM NỔI BẬT CỦA ROYAL CANIN DERMACOMFORT GIẢM DỊ ỨNG DA\r\nCông thức giảm kích ứng da\r\nTình trạng da phản ánh sức khoẻ của chó và chúng cần có chế độ ăn uống thích hợp, điều này đóng vai trò quan trọng trong việc duy trì sức khỏe làn da.\r\n\r\nCông thức đặc biệt của ROYAL CANIN Mini Dermacomfort với các nguồn protein chọn lọc có chất lượng rất cao đặc biệt phù hợp với chó dễ bị kích ứng và mẫn ngứa. Sau 1 tháng sử dụng, 87% chó đã giảm thiểu các dấu hiệu ngứa và kích ứng da.\r\n\r\nHợp chất dưỡng da\r\nSự kết hợp độc đáo của các chất dinh dưỡng giúp hỗ trợ vai trò của lớp màn bảo vệ của da, kết hợp với các axit béo omega 6 (bao gồm axit gamma-linolenic) và các axit béo Omega 3 (bao gồm EPA và DHA) được biết đến với những tác động tích cực ở da.\r\n\r\nSức khỏe răng miệng\r\nROYAL CANIN Mini Dermacomfort giúp giảm sự hình thành vôi răng bằng nhờ các hoạt chất làm giảm canxi có trong nước bọt.\r\n\r\n\r\n\r\nTHÀNH PHẦN\r\nNguyên liệu\r\nGạo, gluten lúa mì, lúa mì, mỡ động vật, gluten ngô, yến mạch xay, ngô, gan gia vị thủy phân, khoáng chất, dầu đậu nành, bột củ cải, dầu cá (nguồn EPA và DHA), hạt lanh (nguồn omega 3) Fructo-oligo-saccharides, dầu cây borage (nguồn gamma-linolenic acid), chiết xuất hoa cúc (nguồn lutein). Tro thô: 5,5%. Sợi thô: 1,4%. Dầu thực vật: 17%. Độ ẩm: 0%. Protein: 26%.', 0),
+('SP0', 'Royal Canin - Mini Dermacomfort', 'food4.jpg', 27, 192000, 'ĐẶC ĐIỂM NỔI BẬT CỦA ROYAL CANIN DERMACOMFORT GIẢM DỊ ỨNG DA\r\nCông thức giảm kích ứng da\r\nTình trạng da phản ánh sức khoẻ của chó và chúng cần có chế độ ăn uống thích hợp, điều này đóng vai trò quan trọng trong việc duy trì sức khỏe làn da.\r\n\r\nCông thức đặc biệt của ROYAL CANIN Mini Dermacomfort với các nguồn protein chọn lọc có chất lượng rất cao đặc biệt phù hợp với chó dễ bị kích ứng và mẫn ngứa. Sau 1 tháng sử dụng, 87% chó đã giảm thiểu các dấu hiệu ngứa và kích ứng da.\r\n\r\nHợp chất dưỡng da\r\nSự kết hợp độc đáo của các chất dinh dưỡng giúp hỗ trợ vai trò của lớp màn bảo vệ của da, kết hợp với các axit béo omega 6 (bao gồm axit gamma-linolenic) và các axit béo Omega 3 (bao gồm EPA và DHA) được biết đến với những tác động tích cực ở da.\r\n\r\nSức khỏe răng miệng\r\nROYAL CANIN Mini Dermacomfort giúp giảm sự hình thành vôi răng bằng nhờ các hoạt chất làm giảm canxi có trong nước bọt.\r\n\r\n\r\n\r\nTHÀNH PHẦN\r\nNguyên liệu\r\nGạo, gluten lúa mì, lúa mì, mỡ động vật, gluten ngô, yến mạch xay, ngô, gan gia vị thủy phân, khoáng chất, dầu đậu nành, bột củ cải, dầu cá (nguồn EPA và DHA), hạt lanh (nguồn omega 3) Fructo-oligo-saccharides, dầu cây borage (nguồn gamma-linolenic acid), chiết xuất hoa cúc (nguồn lutein). Tro thô: 5,5%. Sợi thô: 1,4%. Dầu thực vật: 17%. Độ ẩm: 0%. Protein: 26%.', 1),
 ('SP1', 'Thức ăn cao cấp NutriSource thịt gà, đậu Hà Lan ', 'food5.jpg', 61, 25000, 'Thức ăn cao cấp NutriSource thịt gà, đậu Hà Lan 142g\r\n- Thức ăn cao cấp hỗn hợp hoàn chỉnh cho chó : Thịt gà tươi + Đậu Hà Lan.\r\n\r\n- Không chứa thành phần ngũ cốc gây dị ứng cho thú cưng (GRAIN FREE).\r\n\r\n- Phù hợp cho tất cả các giai đoạn tăng trưởng.\r\n\r\n- Dành cho tất cả giống chó có thể trọng từ 0 - 45 Kg.\r\n\r\n- Trọng lượng : 142g / gói.\r\n\r\n- Xuất xứ : Tuffy\'s Pet Foods, Inc. USA', 0),
 ('SP10', 'Pate Smartheart lon vị gà tây cho chó', 'food10.jpg', 24, 35000, 'Pate Smartheart lon vị gà tây cho chó 400gr là sản phẩm được nghiên cứu sản xuất để phù hợp với nhu cầu dinh dưỡng của chú cún cưng nhà bạn. Với đầy đủ các dưỡng chất thiết yếu cùng với hương vị thịt gà và gan đầy hấp dẫn, Thức Ăn Cho Chó Pate Smartheart lon vị gà tây cho chó 400gr chắc hẳn sẽ là lựa chọn hàng đầu giúp cún cưng của bạn phát triển khỏe mạnh.\r\n\r\nSản phẩm chứa đầy đủ các dưỡng chất thiết yếu, hỗ trợ cho quá trình hoạt động và phát triển của thú cưng nhà bạn, bao gồm:\r\n\r\n- Chất đạm: được chọn từ thịt có chất lượng, cung cấp acid amin cần thiết để xây dựng cơ bắp khỏe mạnh.\r\n\r\n- Chất béo: cung cấp năng lượng và nguồn acid béo thiết yếu để duy trì một làn da khỏe mạnh và một bộ lông bóng mượt.\r\n\r\n- Vitamin: giúp cơ thể phát triển khỏe mạnh và tăng cường hệ thống miễn dịch.\r\n\r\n- Khoáng chất: giúp cơ thể phát triển khỏe mạnh, xương chắc và răng khỏe. \r\n\r\nHướng dẫn sử dụng:\r\n\r\n- Có thể cho cún con dùng trực tiếp hoặc trộn chung với các loại rau, củ, quả, hạt tùy thích.\r\n\r\n- Bảo quản ở nhiệt độ dưới 4 độ C sau khi mở lon và sử dụng hết trong vòng tối đa là 3 ngày.\r\n\r\n- Bảo quản ở nơi khô ráo, thoáng mát, tránh nơi ẩm ướt và tránh ánh sáng trực tiếp.', 0),
 ('SP103', 'Dầu gội và xả cho mèo lông dài', 'suatam10.jpg', 54, 200000, 'Đặc điểm:\r\n\r\nSản phẩm được thiết kế dành riêng cho những chú mèo lông dài, ngoài khả năng làm sạch và kháng khuẩn nổi bật từ cây hương thảo, sản phẩm còn chứa dầu hạt nhân argania spinosa có tác dụng dưỡng ẩm, giúp bộ lông luôn óng mượt. Đặc biệt hai thành phần Panthenol và Tripeptide cung cấp dinh dưỡng đến từng nang lông, tăng cường độ đàn hồi, thúc đẩy sự phát triển của lông và tái tạo protein bị hư tổn.\r\n\r\nDung tích: 280g\r\n\r\nThành phần:\r\n\r\nChiết suất lá sơn trà, lá mê điệt, dầu thầu dầu, dầu hạt nhân argania spinosa, glycerin, caprylyl glycol, copper tripeptide-1.\r\n\r\nHướng dẫn sử dụng:\r\n\r\n Làm ướt bộ lông bằng nước ấm, pha một lượng dầu gội vừa đủ với nước, massage nhẹ nhàng toàn thân (tránh tiếp xúc với mắt) khoảng 3 phút, sau đó xả sạch với nước. Có thể lặp lại lần 2 nếu cần thiết.\r\n\r\n \r\n\r\nLưu ý: dùng cho mèo từ 8 tuần tuổi trở lên.', 0),
@@ -449,7 +451,7 @@ INSERT INTO `sp_dv_tl` (`masp`, `madv`, `matl`) VALUES
 
 CREATE TABLE `taikhoan` (
   `tendangnhap` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'tên đăng nhập',
-  `matkhau` varchar(20) COLLATE utf8_unicode_ci NOT NULL COMMENT 'mật khẩu',
+  `matkhau` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT 'mật khẩu',
   `mavt` varchar(10) COLLATE utf8_unicode_ci DEFAULT 'customer' COMMENT 'mã vai trò',
   `hoten` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT 'họ và tên',
   `ngaysinh` date DEFAULT NULL COMMENT 'ngày sinh',
@@ -463,11 +465,12 @@ CREATE TABLE `taikhoan` (
 --
 
 INSERT INTO `taikhoan` (`tendangnhap`, `matkhau`, `mavt`, `hoten`, `ngaysinh`, `dienthoai`, `email`, `khoa`) VALUES
-('abc123', 'e10adc3949ba59abbe56', 'customer', 'Nguyễn Văn B', '1999-07-08', 957891234, 'nva123@gmail.com', 0),
-('petshopadmin', '1590016631007bb53142', 'admin', 'petshopadmin', '1999-02-25', 123456789, 'hotro@petshop.com', 0),
-('petshopsale', '0beb1ccda5f928a04cfe', 'sale', 'petshopsale', '0000-00-00', 281234567, 'petshop@gmail.com', 0),
-('teoem123', 'aa417909b32961043732', 'customer', 'Trần Văn Tèo', '0000-00-00', 796543784, 'teoem123@gmail.com', 0),
-('tuongdai252', '4d8fcaa9b2f721db5279', 'customer', 'Đỗ Tường Đại', '1999-02-25', 908579025, 'tuongdai252@yahoo.com.vn', 0);
+('abcde', 'e10adc3949ba59abbe56e057f20f883e', 'customer', 'dssd', '2019-08-15', 999999999, 'ewfw@gmail.vn', 0),
+('adsadsadsad', 'ab56b4d92b40713acc5af89985d4b786', 'customer', 'DAD', '0000-00-00', 147258963, 'asdas@gmail.com', 0),
+('dat123', 'e10adc3949ba59abbe56e057f20f883e', 'customer', 'dat', '0000-00-00', 134567892, 'dat@gmail.com', 0),
+('petshopadmin', '1590016631007bb5314216ee0231d38d', 'admin', 'admin', '0000-00-00', 123456789, 'hotro@petshop.com', 0),
+('petshopsale', '0beb1ccda5f928a04cfef687240243e3', 'sale', 'sale', '0000-00-00', 123456798, 'petshop@gmail.com', 0),
+('qwerty', '4607e782c4d86fd5364d7e4508bb10d9', 'customer', 'DASR', '0000-00-00', 369258147, 'asfad@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -587,7 +590,7 @@ ALTER TABLE `vaitro`
 -- AUTO_INCREMENT cho bảng `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `mahd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Các ràng buộc cho các bảng đã đổ

@@ -51,12 +51,6 @@
                     else{
                         echo "        <a href='phanloaisanpham.php'><i class='fas fa-layer-group'> Phân loại sản phẩm</i></a>";
                     }
-                    if($menu == "sanphamgiamgia.php"){
-                        echo "        <a href='sanphamgiamgia.php' class='current'><i class='fas fa-cart-arrow-down'> Sản phẩm giảm giá</i></a>";
-                    }
-                    else{
-                        echo "        <a href='sanphamgiamgia.php'><i class='fas fa-cart-arrow-down'> Sản phẩm giảm giá</i></a>";
-                    }
                     if($menu == "sanphamdaxoa.php"){
                         echo "        <a href='sanphamdaxoa.php' class='current'><i class='fas fa-trash-alt'> Sản phẩm đã xóa</i></a>";
                     }

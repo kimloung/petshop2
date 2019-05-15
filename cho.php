@@ -118,6 +118,7 @@
         <div class="clear"></div>
         
         <?php
+	if($dem != 0)
             include('pagination.php');
         ?>
         <div class="clear"></div>
