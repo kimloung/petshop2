@@ -28,7 +28,6 @@
     <link href="css/donhang.css" rel="stylesheet" type="text/css">
 
     <script src="js/Scroll_on_Top.js"></script>
-    <script src="js/SP.js"></script>
     <script src="js/cart.js"></script>
 
     <title>
