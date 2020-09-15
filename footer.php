@@ -37,7 +37,7 @@
                     <a href="https://www.twitter.com/"></a>
                     <a href="https://www.youtube.com/"></a>
                 </li>
-                <li style="padding-top:7px"><a href="callto:028xxxxxxxx">Sđt: 028xxxxxxxx</a></li>
+                <li style="padding-top:7px"><a href="callto:02819375409">Sđt: 02819375409</a></li>
                 <li><a href="mailto:petshop@gmail.com">Email: petshop@gmail.com</a></li>
             </ul>
         </div>

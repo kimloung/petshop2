@@ -4,6 +4,11 @@
 ?>
 
 <?php
+	if (empty($_GET['masp']))
+		echo "<script language='javascript'>window.location='thongtinsanpham.php';</script>";
+?>
+
+<?php
     if (isset($_FILES['hinhanh']))
     {
         $errors= array();

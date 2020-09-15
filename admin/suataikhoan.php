@@ -4,6 +4,11 @@
 ?>
 
 <?php
+	if (empty($_GET['tendangnhap']))
+		echo "<script language='javascript'>window.location='thongtintaikhoan.php';</script>";
+?>
+
+<?php
     if (isset($_POST['hoten']) && isset($_POST['ngaysinh'])){
         $sql = "UPDATE taikhoan SET hoten='".$_POST['hoten']."', ngaysinh='".$_POST['ngaysinh']."' WHERE tendangnhap = '" .$_GET['tendangnhap']. "'";
         DataProvider::executeQuery($sql);

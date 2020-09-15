@@ -60,7 +60,7 @@ form img{
     cursor: pointer;
 }
 
-input[type=submit], input[type=reset]{
+#thongtincanhan input[type=submit], input[type=reset]{
     background-color: transparent;
     border: none;
     color: #007bff;
@@ -69,7 +69,7 @@ input[type=submit], input[type=reset]{
     float: left;
 }
 
-input[type=submit]:hover, input[type=reset]:hover{
+#thongtincanhan input[type=submit]:hover, input[type=reset]:hover{
     text-decoration: underline;
 }
 
